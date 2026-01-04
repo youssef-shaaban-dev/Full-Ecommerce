@@ -8,7 +8,7 @@ const AccountBody = () => {
     LastName: "",
     email: "",
     address: "",
-    curentPassword: "",
+    currentPassword: "",
     newPassword: "",
     confirmPassword: "",
   };

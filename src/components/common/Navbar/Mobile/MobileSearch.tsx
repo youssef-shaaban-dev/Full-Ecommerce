@@ -44,7 +44,8 @@ const MobileSearch = () => {
     }, []);
 
     return (
-        <div className="md:hidden px-4 pb-4 search-container" ref={dropdownRef}>
+
+        <div className="px-4 pb-4 search-container max-w-7xl mx-auto" ref={dropdownRef}>
             <div className="relative">
                 <Input
                     type="text"
@@ -67,7 +68,14 @@ const MobileSearch = () => {
                             filteredProducts.slice(0, 4).map((product) => (
                                 <div key={product.productId} className="p-3 hover:bg-gray-50 cursor-pointer transition-colors border-b last:border-b-0">
                                     <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                                        <span className="text-xl">{product.mainImageUrl}</span>
+                                        <div className="relative w-12 h-12 flex-shrink-0">
+                                            {/* @ts-ignore */}
+                                            <img
+                                                src={product.mainImageUrl}
+                                                alt={product.name}
+                                                className="rounded-md object-cover w-full h-full"
+                                            />
+                                        </div>
                                         <div className="flex-1">
                                             <h4 className="font-medium text-gray-900 text-sm">{product.name}</h4>
                                         </div>

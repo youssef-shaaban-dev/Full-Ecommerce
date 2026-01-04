@@ -44,13 +44,17 @@ const AuthButtons = () => {
                             </div>
                         </div>
                         <Separator />
-                        <DropdownMenuItem className="hover:bg-red-50 focus:bg-red-50 cursor-pointer">
-                            <User className="h-4 w-4 mr-2 rtl:mr-0 rtl:ml-2" />
-                            {locale === 'ar' ? 'الملف الشخصي' : 'Profile'}
+                        <DropdownMenuItem asChild className="hover:bg-red-50 focus:bg-red-50 cursor-pointer">
+                            <Link href='/account'>
+                                <User className="h-4 w-4 mr-2 rtl:mr-0 rtl:ml-2" />
+                                {locale === 'ar' ? 'الملف الشخصي' : 'Profile'}
+                            </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem className="hover:bg-red-50 focus:bg-red-50 cursor-pointer">
-                            <ShoppingCart className="h-4 w-4 mr-2 rtl:mr-0 rtl:ml-2" />
-                            {locale === 'ar' ? 'طلباتي' : 'My Orders'}
+                        <DropdownMenuItem asChild className="hover:bg-red-50 focus:bg-red-50 cursor-pointer">
+                            <Link href='/orders'>
+                                <ShoppingCart className="h-4 w-4 mr-2 rtl:mr-0 rtl:ml-2" />
+                                {locale === 'ar' ? 'طلباتي' : 'My Orders'}
+                            </Link>
                         </DropdownMenuItem>
 
                         <DropdownMenuItem className="hover:bg-red-50 focus:bg-red-50 cursor-pointer">
@@ -73,27 +77,39 @@ const AuthButtons = () => {
                     </DropdownMenuContent>
                 </DropdownMenu>
             ) : (
-                <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                    <Link href={"/login"} className="flex items-center">
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            className="text-gray-700 hover:text-red-600 hover:bg-red-50 transition-all duration-300 font-medium"
-                        >
-                            {locale === 'ar' ? 'تسجيل الدخول' : 'Sign In'}
-                        </Button>
-                    </Link>
-                    <Link href={"/signup"} className="flex items-center">
-                        <Button
-                            size="sm"
+                <>
+                    {/* Desktop: Full Buttons */}
+                    <div className="hidden lg:flex items-center space-x-2 rtl:space-x-reverse">
+                        <Link href={"/login"} className="flex items-center">
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-gray-700 hover:text-red-600 hover:bg-red-50 transition-all duration-300 font-medium"
+                            >
+                                {locale === 'ar' ? 'تسجيل الدخول' : 'Sign In'}
+                            </Button>
+                        </Link>
+                        <Link href={"/signup"} className="flex items-center">
+                            <Button
+                                size="sm"
+                                className="bg-red-600 hover:bg-red-700 text-white transition-all duration-300 hover:scale-105 shadow-sm"
+                            >
+                                {locale === 'ar' ? 'إنشاء حساب' : 'Sign Up'}
+                            </Button>
+                        </Link>
+                    </div>
 
-                            className="bg-red-600 hover:bg-red-700 text-white transition-all duration-300 hover:scale-105 shadow-sm"
-                        >
-                            {locale === 'ar' ? 'إنشاء حساب' : 'Sign Up'}
-                        </Button>
-                    </Link>
-                </div>
-            )}
+                    {/* Mobile: User Icon only */}
+                    <div className="lg:hidden">
+                        <Link href={"/login"}>
+                            <Button variant="ghost" size="icon" className="text-gray-700 hover:text-red-600">
+                                <User className="h-6 w-6" />
+                            </Button>
+                        </Link>
+                    </div>
+                </>
+            )
+            }
         </>
     )
 }

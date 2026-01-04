@@ -11,23 +11,23 @@ interface MenuItem {
 const uls: MenuItem[] = [
   {
     title: "Manage My Account",
-    lis: ["My Profile", "Address Book", "Ny Payment Options"],
+    lis: ["My Profile", "Addresses", "reviews"],
   },
   {
     title: "My Orders",
-    lis: ["My Returns", "My Cancellations"],
+    lis: ["orders"],
   },
   {
     title: "My WishList",
   },
 ];
-const Accountpage = () => {
+const AccountPage = () => {
   return (
     <div className="my-28 mx-auto w-[90%]">
       <div className=" flex justify-between ">
         <PathLinks titles={["My Account"]} />
         <h5 className="text-xs font-extralight">
-          Welcome! <span className="text-red-600">ya 3lk</span>
+          Welcome! <span className="text-red-600">Joo</span>
         </h5>
       </div>
       <div className="my-12 flex gap-10 custom-handling:flex-col">
@@ -44,4 +44,4 @@ const Accountpage = () => {
   );
 };
 
-export default Accountpage;
+export default AccountPage;
