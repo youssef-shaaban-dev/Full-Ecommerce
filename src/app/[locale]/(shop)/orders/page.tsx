@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Package, Eye, Download, Star, Clock, CheckCircle, XCircle, Truck } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
+import Image from 'next/image';
 
 interface OrderItem {
     id: string;
@@ -160,7 +161,7 @@ const CustomerOrdersPage = () => {
                             ].map((tab) => (
                                 <button
                                     key={tab.key}
-                                    onClick={() => setActiveTab(tab.key as any)}
+                                    onClick={() => setActiveTab(tab.key as typeof activeTab)}
                                     className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${activeTab === tab.key
                                         ? 'border-blue-500 text-blue-600'
                                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
@@ -211,10 +212,12 @@ const CustomerOrdersPage = () => {
                                     <div className="space-y-4">
                                         {order.items.map((item) => (
                                             <div key={item.id} className="flex items-center space-x-4 space-x-reverse">
-                                                <img
+                                                <Image
                                                     src={item.image}
                                                     alt={item.name}
                                                     className="w-16 h-16 rounded-lg object-cover bg-gray-100"
+                                                    width={64}
+                                                    height={64}
                                                 />
                                                 <div className="flex-1">
                                                     <h4 className="text-sm font-medium text-gray-900">{item.name}</h4>
@@ -233,7 +236,7 @@ const CustomerOrdersPage = () => {
                                     <div className="flex items-center justify-between">
                                         <div className="flex space-x-3 space-x-reverse">
                                             <button className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                <Eye className="w-4 h-4 ml-1" onClick={() => showOrderDetails(order.id)} />
+                                                <Eye className="w-4 h-4 ml-1" onClick={() => showOrderDetails(Number(order.id))} />
                                                 عرض التفاصيل
                                             </button>
                                             {order.status === 'delivered' && (

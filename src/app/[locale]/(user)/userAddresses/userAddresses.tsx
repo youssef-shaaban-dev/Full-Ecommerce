@@ -6,10 +6,8 @@ import {
     Trash2,
     Home,
     Building,
-    MapIcon,
     Phone,
     User,
-    Check,
     X,
     Star,
     Navigation,
@@ -132,8 +130,8 @@ const UserAddressesPage = () => {
         } else {
             // Add new address
             const newAddress: Address = {
-                id: Date.now().toString(),
                 ...formData as Address,
+                id: crypto.randomUUID(),
                 createdAt: new Date().toISOString().split('T')[0],
                 updatedAt: new Date().toISOString().split('T')[0]
             };
@@ -264,7 +262,9 @@ const UserAddressesPage = () => {
                                 <dl>
                                     <dt className="text-sm font-medium text-gray-500 truncate">آخر تحديث</dt>
                                     <dd className="text-sm font-semibold text-gray-900">
-                                        {new Date(Math.max(...addresses.map(addr => new Date(addr.updatedAt).getTime()))).toLocaleDateString('ar-SA')}
+                                        {addresses.length > 0
+                                            ? new Date(Math.max(...addresses.map(addr => new Date(addr.updatedAt).getTime()))).toLocaleDateString('ar-SA')
+                                            : '-'}
                                     </dd>
                                 </dl>
                             </div>

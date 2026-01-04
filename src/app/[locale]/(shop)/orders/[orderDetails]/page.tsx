@@ -18,6 +18,7 @@ import {
   Copy,
   ExternalLink
 } from 'lucide-react';
+import Image from 'next/image';
 
 interface OrderItem {
   id: string;
@@ -256,10 +257,10 @@ const OrderDetailsPage = () => {
                   ].map(({ key, label, icon: Icon }) => (
                     <button
                       key={key}
-                      onClick={() => setActiveTab(key as any)}
+                      onClick={() => setActiveTab(key as typeof activeTab)}
                       className={`flex items-center px-6 py-4 text-sm font-medium border-b-2 ${activeTab === key
-                          ? 'border-blue-500 text-blue-600'
-                          : 'border-transparent text-gray-500 hover:text-gray-700'
+                        ? 'border-blue-500 text-blue-600'
+                        : 'border-transparent text-gray-500 hover:text-gray-700'
                         }`}
                     >
                       <Icon className="w-4 h-4 ml-1" />
@@ -278,10 +279,12 @@ const OrderDetailsPage = () => {
                       <div className="space-y-4">
                         {order.items.map((item) => (
                           <div key={item.id} className="flex items-center space-x-4 space-x-reverse p-4 border border-gray-200 rounded-lg">
-                            <img
+                            <Image
                               src={item.image}
                               alt={item.name}
                               className="w-20 h-20 rounded-lg object-cover bg-gray-100"
+                              width={64}
+                              height={64}
                             />
                             <div className="flex-1">
                               <h4 className="font-medium text-gray-900">{item.name}</h4>

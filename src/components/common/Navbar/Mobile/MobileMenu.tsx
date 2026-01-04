@@ -1,16 +1,14 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { PageLinks } from "@/constant/enum";
 import { Link } from "@/i18n/routing";
 import { useAuthStore } from "@/stores/auth/useAuthStore";
 import { useCartStore } from "@/stores/cart/cartStore";
 import { useWishListStore } from "@/stores/wishlist/WishListStore";
-import { Globe, Heart, Home, Info, Mail, Menu, Search, ShoppingBasket, ShoppingCart, X } from "lucide-react";
+import { Globe, Heart, Menu, ShoppingCart, X } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useState } from "react";
 import { getNavLinks } from "../navigationData";

@@ -1,7 +1,7 @@
 import { PageLinks } from "@/constant/enum";
 import { Home, Info, Mail, ShoppingBasket } from "lucide-react";
 
-export const getNavLinks = (t: any) => [
+export const getNavLinks = (t: (key: string) => string) => [
     {
         id: 1,
         name: t("navLinks.home"),

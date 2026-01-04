@@ -5,21 +5,18 @@ import {
     Trash2,
     ThumbsUp,
     MessageCircle,
-    Calendar,
-    Package,
     Award,
     TrendingUp,
     Eye,
-    Filter,
     ChevronDown,
     Plus,
     Search,
     MoreHorizontal,
     ExternalLink,
-    Image,
     Check,
     Clock
 } from 'lucide-react';
+import Image from 'next/image';
 
 interface UserReview {
     id: string;
@@ -56,7 +53,7 @@ const UserReviewsPage = () => {
     const [selectedStatus, setSelectedStatus] = useState<'all' | 'published' | 'pending' | 'rejected'>('all');
     const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'rating' | 'helpful' | 'views'>('newest');
     const [searchQuery, setSearchQuery] = useState('');
-    const [showStats, setShowStats] = useState(true);
+    const [showStats] = useState(true);
 
     // إحصائيات المستخدم
     const userStats: UserStats = {
@@ -215,8 +212,8 @@ const UserReviewsPage = () => {
                     <Star
                         key={star}
                         className={`w-4 h-4 ${star <= rating
-                                ? 'text-yellow-400 fill-current'
-                                : 'text-gray-300'
+                            ? 'text-yellow-400 fill-current'
+                            : 'text-gray-300'
                             }`}
                     />
                 ))}
@@ -350,7 +347,7 @@ const UserReviewsPage = () => {
                             <div className="relative">
                                 <select
                                     value={selectedStatus}
-                                    onChange={(e) => setSelectedStatus(e.target.value as any)}
+                                    onChange={(e) => setSelectedStatus(e.target.value as UserReview['status'] | 'all')}
                                     className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 >
                                     <option value="all">جميع الحالات</option>
@@ -365,7 +362,7 @@ const UserReviewsPage = () => {
                             <div className="relative">
                                 <select
                                     value={sortBy}
-                                    onChange={(e) => setSortBy(e.target.value as any)}
+                                    onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
                                     className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 >
                                     <option value="newest">الأحدث</option>
@@ -401,10 +398,12 @@ const UserReviewsPage = () => {
                                 <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center space-x-4 space-x-reverse">
-                                            <img
+                                            <Image
                                                 src={review.productImage}
                                                 alt={review.productName}
                                                 className="w-12 h-12 rounded-lg object-cover"
+                                                width={48}
+                                                height={48}
                                             />
                                             <div>
                                                 <h3 className="font-semibold text-gray-900">{review.productName}</h3>
@@ -502,8 +501,8 @@ const UserReviewsPage = () => {
 
                                     {/* Recommendation */}
                                     <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium mb-4 ${review.recommended
-                                            ? 'bg-green-100 text-green-800'
-                                            : 'bg-red-100 text-red-800'
+                                        ? 'bg-green-100 text-green-800'
+                                        : 'bg-red-100 text-red-800'
                                         }`}>
                                         {review.recommended ? '✓ أنصح بالشراء' : '✗ لا أنصح بالشراء'}
                                     </div>

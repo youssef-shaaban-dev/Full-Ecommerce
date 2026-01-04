@@ -1,21 +1,21 @@
+"use client"
 import React, { useState } from 'react';
-import { 
-  Star, 
-  ThumbsUp, 
-  ThumbsDown, 
-  MessageCircle, 
-  Filter, 
-  ChevronDown, 
-  Camera, 
-  X, 
+import {
+  Star,
+  ThumbsUp,
+  ThumbsDown,
+  MessageCircle,
+  ChevronDown,
+  Camera,
+  X,
   Check,
   User,
   Calendar,
   MoreHorizontal,
   Flag,
   Share2,
-  Heart
 } from 'lucide-react';
+import Image from 'next/image';
 
 interface ReviewImage {
   id: string;
@@ -193,11 +193,10 @@ const ProductReviewsPage = () => {
             className={`${interactive ? 'cursor-pointer hover:scale-110 transition-transform' : ''}`}
           >
             <Star
-              className={`w-5 h-5 ${
-                star <= rating
+              className={`w-5 h-5 ${star <= rating
                   ? 'text-yellow-400 fill-current'
                   : 'text-gray-300'
-              }`}
+                }`}
             />
           </button>
         ))}
@@ -215,10 +214,12 @@ const ProductReviewsPage = () => {
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center space-x-6 space-x-reverse">
-            <img
+            <Image
               src={product.image}
               alt={product.name}
               className="w-20 h-20 rounded-lg object-cover"
+              width={80}
+              height={80}
             />
             <div>
               <h1 className="text-2xl font-bold text-gray-900">{product.name}</h1>
@@ -240,7 +241,7 @@ const ProductReviewsPage = () => {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sticky top-4">
               <h2 className="text-xl font-bold text-gray-900 mb-4">ملخص التقييمات</h2>
-              
+
               {/* Overall Rating */}
               <div className="text-center mb-6">
                 <div className="text-5xl font-bold text-gray-900 mb-2">{product.rating}</div>
@@ -254,9 +255,8 @@ const ProductReviewsPage = () => {
                   <div key={stars} className="flex items-center space-x-3 space-x-reverse">
                     <button
                       onClick={() => setSelectedRating(selectedRating === stars ? null : stars)}
-                      className={`flex items-center space-x-1 space-x-reverse text-sm hover:text-blue-600 transition-colors ${
-                        selectedRating === stars ? 'text-blue-600 font-medium' : 'text-gray-600'
-                      }`}
+                      className={`flex items-center space-x-1 space-x-reverse text-sm hover:text-blue-600 transition-colors ${selectedRating === stars ? 'text-blue-600 font-medium' : 'text-gray-600'
+                        }`}
                     >
                       <span>{stars}</span>
                       <Star className="w-4 h-4 fill-current text-yellow-400" />
@@ -277,7 +277,7 @@ const ProductReviewsPage = () => {
               {/* Filters */}
               <div className="space-y-3">
                 <h3 className="font-medium text-gray-900">تصفية المراجعات</h3>
-                
+
                 <label className="flex items-center space-x-2 space-x-reverse">
                   <input
                     type="checkbox"
@@ -320,7 +320,7 @@ const ProductReviewsPage = () => {
                 <div className="relative">
                   <select
                     value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value as any)}
+                    onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
                     className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="newest">الأحدث</option>
@@ -436,11 +436,10 @@ const ProductReviewsPage = () => {
                     )}
 
                     {/* Recommendation */}
-                    <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium mb-4 ${
-                      review.recommended 
-                        ? 'bg-green-100 text-green-800' 
+                    <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium mb-4 ${review.recommended
+                        ? 'bg-green-100 text-green-800'
                         : 'bg-red-100 text-red-800'
-                    }`}>
+                      }`}>
                       {review.recommended ? '✓ أنصح بالشراء' : '✗ لا أنصح بالشراء'}
                     </div>
 
@@ -486,7 +485,7 @@ const ProductReviewsPage = () => {
                 <X className="w-6 h-6" />
               </button>
             </div>
-            
+
             <div className="p-6 space-y-6">
               {/* Rating */}
               <div>

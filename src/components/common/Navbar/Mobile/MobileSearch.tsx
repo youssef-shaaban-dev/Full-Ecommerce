@@ -6,6 +6,7 @@ import { Search } from 'lucide-react'
 import useDebounce from '@/hooks/useDebounce'
 import useGetProducts from '@/hooks/Product/useGetProducts'
 import { useLocale } from 'next-intl'
+import Image from 'next/image'
 
 const MobileSearch = () => {
 
@@ -69,11 +70,12 @@ const MobileSearch = () => {
                                 <div key={product.productId} className="p-3 hover:bg-gray-50 cursor-pointer transition-colors border-b last:border-b-0">
                                     <div className="flex items-center space-x-3 rtl:space-x-reverse">
                                         <div className="relative w-12 h-12 flex-shrink-0">
-                                            {/* @ts-ignore */}
-                                            <img
+                                            <Image
                                                 src={product.mainImageUrl}
                                                 alt={product.name}
                                                 className="rounded-md object-cover w-full h-full"
+                                                width={48}
+                                                height={48}
                                             />
                                         </div>
                                         <div className="flex-1">
