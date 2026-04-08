@@ -1,6 +1,5 @@
 "use client";
 
-import styles from "@/styles/wishlist/wishList.module.scss";
 import { useState } from "react";
 import SuggestionProducts from "./SuggestionProducts";
 import { useWishListStore } from "@/stores/wishlist/WishListStore";
@@ -36,27 +35,31 @@ const WishListPage = () => {
   };
 
   return (
-    <section className={styles.wishlist} key={locale}>
-      <div className={styles.header}>
-        <h3>
-          {t("title")} <span>({wishListItems.length})</span>
+    <section className="flex flex-col gap-16 my-16 mx-auto w-[90%] max-w-7xl" key={locale}>
+      <div className="flex justify-between items-center">
+        <h3 className="text-2xl font-medium">
+          {t("title")} <span className="text-primary-red font-semibold">({wishListItems.length})</span>
         </h3>
-        <button className={styles.moveAllBtn} onClick={moveAllToCart}>
+        <Button 
+          variant="outline" 
+          onClick={moveAllToCart}
+          className="px-10 h-10 border-black rounded-[3px] hover:bg-black hover:text-white transition-all"
+        >
           {t("move_all")} 🛒
-        </button>
+        </Button>
       </div>
 
-      <div className={styles.productsGrid}>
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {visibleProducts.map((wishlistItem, index) => (
           <ProductCard key={index} product={wishlistItem.product} mode="wishlist" />
         ))}
       </div>
 
       {!showAll && wishListItems.length > 4 && (
-        <div className="flex justify-end">
+        <div className="flex justify-center">
           <Button
             onClick={() => setShowAll(true)}
-            className="w-[170px] !h-14 mt-8 px-4 py-2 text-white rounded-lg shadow-md bg-primary"
+            className="w-[170px] h-14"
           >
             {t("see_all")}
           </Button>
@@ -67,6 +70,5 @@ const WishListPage = () => {
     </section>
   );
 };
-
 
 export default WishListPage;

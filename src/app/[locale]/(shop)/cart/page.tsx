@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/styles/cart/Cart.module.scss";
+
 import CartRow from "./CartRow";
 import CartHeadRow from "./CartHeadRow";
 import CartTotal from "./CartTotal";
@@ -35,7 +35,7 @@ const CartPage = () => {
         <PathLinks titles={[t("title")]} />
       </div>
       <div>
-        <table className={styles.catTable}>
+        <table className="border-separate w-full border-spacing-y-[35px] table-fixed">
           <thead className="mb-10">
             <CartHeadRow />
           </thead>
@@ -43,18 +43,20 @@ const CartPage = () => {
             <CartRow cartItems={cartItems} />
           </tbody>
         </table>
-        <div className=" flex justify-between">
-          <button className={styles.cartBtn}>{t("buttons.return")}</button>
-          <button className={styles.cartBtn} onClick={handleUpdateCart}>
+        <div className="flex justify-between">
+          <Button variant="outline" className="px-10 h-10 border-black rounded-[3px]">
+            {t("buttons.return")}
+          </Button>
+          <Button variant="outline" className="px-10 h-10 border-black rounded-[3px]" onClick={handleUpdateCart}>
             {t("buttons.update")}
-          </button>
+          </Button>
         </div>
       </div>
       <div className="mt-16 flex justify-between tab-large-screen:flex-col tab-large-screen:gap-4 tab-large-screen:place-items-center">
         <div>
           <form className="flex gap-3">
             <input
-              className="couponCode"
+              className="border border-black px-4 py-2 rounded-[3px] outline-none w-full sm:w-[300px]"
               type="text"
               name="text"
               placeholder={t("buttons.coupon_placeholder")}

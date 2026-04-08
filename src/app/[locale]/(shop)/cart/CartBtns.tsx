@@ -1,12 +1,15 @@
-import styles from "@/styles/cart/Cart.module.scss";
+import React from "react";
+import { Button } from "@/components/ui/button";
+
 interface CartBtnsProps {
-    title: string;
-  }
-const CartBtns: React.FC<CartBtnsProps>   = ({title}) => {
+  title: string;
+}
+
+const CartBtns: React.FC<CartBtnsProps> = ({ title }) => {
   return (
-    <>
-      <button className={styles.cartBtn}>{title}</button>
-    </>
+    <Button variant="outline" className="px-10 h-10 border-black rounded-[3px] hover:bg-black hover:text-white transition-all">
+      {title}
+    </Button>
   );
 };
 

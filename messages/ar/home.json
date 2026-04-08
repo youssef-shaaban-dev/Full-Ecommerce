@@ -42,7 +42,13 @@
   "music_experience": {
       "subtitle": "الفئة",
       "title": "عزز تجربة الموسيقى الخاصة بك",
-      "buy_now": "اشتري الآن!"
+      "buy_now": "اشتري الآن!",
+      "timer": {
+        "days": "أيام",
+        "hours": "ساعات",
+        "minutes": "دقائق",
+        "seconds": "ثواني"
+      }
   },
   "features": {
       "ps5": {

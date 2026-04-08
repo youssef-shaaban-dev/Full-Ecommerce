@@ -1,4 +1,3 @@
-import styles from "@/styles/cart/Cart.module.scss";
 import { useTranslations } from "next-intl";
 
 const CartHeadRow = () => {
@@ -7,9 +6,9 @@ const CartHeadRow = () => {
 
   return (
     <>
-      <tr className={styles.tableRow}>
+      <tr className="border-b border-gray-200">
         {headTitles.map((i, index) => (
-          <th key={index} className={`${styles.headColumns} ${styles.columns}`}>
+          <th key={index} className="p-4 text-left font-semibold">
             {i}
           </th>
         ))}

@@ -42,7 +42,13 @@
   "music_experience": {
     "subtitle": "Category",
     "title": "Enhance Your Music Experience",
-    "buy_now": "Buy Now!"
+    "buy_now": "Buy Now!",
+    "timer": {
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    }
   },
   "features": {
       "ps5": {

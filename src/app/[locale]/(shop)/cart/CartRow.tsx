@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useCartStore } from "@/stores/cart/cartStore";
-import styles from "@/styles/cart/Cart.module.scss";
 import { CartItem } from "@/types/cart/CartTypes";
 import { useMemo } from "react";
 
@@ -24,7 +23,7 @@ const CartRow = ({ cartItems }: CartRowProps) => {
   return (
     <>
       {cartItems.map((item, index) => (
-        <tr key={index} className={styles.tableRow}>
+        <tr key={index} className="bg-[#f7f4f4] shadow-[0_0_10px_5px_rgba(232,222,222,0.54)] w-full">
           <td>
             <Image
               className="flex justify-center items-center mx-auto m-3 custom-sm:w-[50px]"
@@ -34,12 +33,12 @@ const CartRow = ({ cartItems }: CartRowProps) => {
               height={70}
             />
           </td>
-          <td className={styles.columns}>{item.product.name}</td>
-          <td className={styles.columns}>${item.product.price}</td>
-          <td className={styles.columns}>
-            <div className="flex gap-x-2 justify-between items-center mt-1 px-3 py-4 text-base border w-[60px] h-11 border-gray-800 focus:border-black sm:text-sm rounded-md">
-              <p>{item.quantity}</p>
-              <div className="flex flex-col justify-center gap-1">
+          <td className="p-4 text-center">{item.product.name}</td>
+          <td className="p-4 text-center">${item.product.price}</td>
+          <td className="p-4 text-center">
+            <div className="flex gap-x-2 justify-between items-center mx-auto text-base border w-[60px] h-11 border-gray-800 focus:border-black sm:text-sm rounded-md">
+              <p className="flex-1 text-center">{item.quantity}</p>
+              <div className="flex flex-col justify-center gap-1 pr-1">
                 <button
                   onClick={() =>
                     updateQuantity(
@@ -65,10 +64,10 @@ const CartRow = ({ cartItems }: CartRowProps) => {
               </div>
             </div>
           </td>
-          <td className={styles.columns}>
+          <td className="p-4 text-center">
             ${(item.product.price * (item.quantity ?? 1)).toFixed(2)}
           </td>
-          <td className={styles.columns}>
+          <td className="p-4 text-center">
             <Button
               onClick={() => removeFromCart(item.product.productId)}
               variant="destructive"

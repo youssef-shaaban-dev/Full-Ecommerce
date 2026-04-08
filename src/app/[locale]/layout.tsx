@@ -9,7 +9,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Toastify from "@/components/common/toastify/Toastify";
 import Navbar from "@/components/common/Navbar/Navbar";
-import "@/styles/main.scss";
+import "@/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Full E-Commerce",

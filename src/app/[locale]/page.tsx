@@ -11,11 +11,9 @@ import MusicSection from "@/components/pages/Home/musicAdvertise/MusicSection";
 
 
 const HomePage = () => {
-
   return (
-    // Swiper component for the home page
-    <div className="w-full container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16">
-      <div className="home-section">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex justify-between items-center h-fit py-12">
         <HomeSwiper />
       </div>
 

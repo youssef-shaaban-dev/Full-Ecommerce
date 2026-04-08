@@ -1,6 +1,6 @@
 "use client";
 import { FaArrowUpLong } from "react-icons/fa6";
-import styles from "@/styles/swiper/CustomSwiper.module.scss";
+
 const UpBtn = () => {
   const scrollToTop = () => {
     window.scrollTo({
@@ -11,7 +11,7 @@ const UpBtn = () => {
   return (
     <div
       onClick={scrollToTop}
-      className={`${styles.customSwiperButton} w-11 h-11 rounded-full ml-auto fixed bottom-10 right-10`}
+      className="fixed bottom-10 end-10 w-11 h-11 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-800 hover:bg-gray-800 hover:text-white transition-all duration-300 cursor-pointer z-50"
     >
       <FaArrowUpLong />
     </div>
