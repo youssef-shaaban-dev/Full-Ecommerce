@@ -15,10 +15,10 @@ import {
   Star,
   Phone,
   Mail,
-  Copy,
-  ExternalLink
+  Copy
 } from 'lucide-react';
 import Image from 'next/image';
+import { useTranslations, useLocale } from 'next-intl';
 
 interface OrderItem {
   id: string;
@@ -66,9 +66,11 @@ interface Order {
 }
 
 const OrderDetailsPage = () => {
+  const t = useTranslations("orders");
+  const locale = useLocale();
   const [activeTab, setActiveTab] = useState<'details' | 'tracking' | 'invoice'>('details');
 
-  // بيانات وهمية للطلب
+  // Bilingual Mock Data
   const order: Order = {
     id: 'ORD-001',
     date: '2024-08-20T10:30:00',
@@ -76,25 +78,25 @@ const OrderDetailsPage = () => {
     items: [
       {
         id: '1',
-        name: 'iPhone 15 Pro - 256GB',
+        name: locale === 'ar' ? 'آيفون 15 برو - 256 جيجابايت' : 'iPhone 15 Pro - 256GB',
         image: '/api/placeholder/120/120',
         price: 1199.99,
         quantity: 1,
         sku: 'IPH15P-256-BLU',
-        variant: 'أزرق تيتانيوم'
+        variant: locale === 'ar' ? 'أزرق تيتانيوم' : 'Blue Titanium'
       },
       {
         id: '2',
-        name: 'حافظة جلدية أصلية',
+        name: locale === 'ar' ? 'حافظة جلدية أصلية' : 'Original Leather Case',
         image: '/api/placeholder/120/120',
         price: 59.99,
         quantity: 1,
         sku: 'CASE-LEA-BLK',
-        variant: 'أسود'
+        variant: locale === 'ar' ? 'أسود' : 'Black'
       },
       {
         id: '3',
-        name: 'شاحن لاسلكي سريع',
+        name: locale === 'ar' ? 'شاحن لاسلكي سريع' : 'Fast Wireless Charger',
         image: '/api/placeholder/120/120',
         price: 39.99,
         quantity: 2,
@@ -106,43 +108,43 @@ const OrderDetailsPage = () => {
     tax: 107.20,
     discount: 50.00,
     total: 1412.16,
-    paymentMethod: 'فيزا **** 1234',
+    paymentMethod: locale === 'ar' ? 'فيزا **** 1234' : 'Visa **** 1234',
     shippingAddress: {
-      name: 'أحمد محمد علي',
+      name: locale === 'ar' ? 'أحمد محمد علي' : 'Ahmed Mohamed Ali',
       phone: '+966 50 123 4567',
-      street: 'شارع الملك فهد، حي النخيل، مبنى 123',
-      city: 'الرياض',
-      state: 'الرياض',
+      street: locale === 'ar' ? 'شارع الملك فهد، حي النخيل، مبنى 123' : 'King Fahd Road, Al Nakheel Dist, Bldg 123',
+      city: locale === 'ar' ? 'الرياض' : 'Riyadh',
+      state: locale === 'ar' ? 'الرياض' : 'Riyadh',
       zipCode: '12345',
-      country: 'السعودية'
+      country: locale === 'ar' ? 'السعودية' : 'Saudi Arabia'
     },
     trackingNumber: 'TRK123456789',
     estimatedDelivery: '2024-08-25',
     tracking: [
       {
-        status: 'تم تأكيد الطلب',
+        status: 'order_confirmed',
         date: '2024-08-20T10:30:00',
-        description: 'تم استلام طلبكم وبدء المعالجة'
+        description: 'order_received_desc'
       },
       {
-        status: 'قيد التحضير',
+        status: 'preparing',
         date: '2024-08-20T14:15:00',
-        description: 'جاري تحضير المنتجات وتغليفها'
+        description: 'preparing_desc'
       },
       {
-        status: 'تم الشحن',
+        status: 'shipped',
         date: '2024-08-21T09:00:00',
-        location: 'مركز التوزيع - الرياض',
-        description: 'تم تسليم الشحنة لشركة الشحن'
+        location: locale === 'ar' ? 'مركز التوزيع' : 'Distribution Center',
+        description: 'delivered_to_carrier_desc'
       },
       {
-        status: 'في الطريق',
+        status: 'on_the_way',
         date: '2024-08-22T11:30:00',
-        location: 'مركز فرز الدمام',
-        description: 'الشحنة في الطريق إلى العنوان المحدد'
+        location: locale === 'ar' ? 'مركز الفرز' : 'Sorting Center',
+        description: 'shipped_to_address_desc'
       }
     ],
-    notes: 'يرجى التسليم في المساء بعد الساعة 6 مساءً'
+    notes: locale === 'ar' ? 'يرجى التسليم في المساء بعد الساعة 6 مساءً' : 'Please deliver in the evening after 6 PM'
   };
 
   const getStatusColor = (status: Order['status']) => {
@@ -168,14 +170,7 @@ const OrderDetailsPage = () => {
   };
 
   const getStatusText = (status: Order['status']) => {
-    switch (status) {
-      case 'pending': return 'في الانتظار';
-      case 'processing': return 'قيد المعالجة';
-      case 'shipped': return 'تم الشحن';
-      case 'delivered': return 'تم التسليم';
-      case 'cancelled': return 'ملغي';
-      default: return status;
-    }
+    return t(`status.${status}`);
   };
 
   const copyTrackingNumber = () => {
@@ -185,19 +180,19 @@ const OrderDetailsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50" dir="rtl">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-4">
-            <div className="flex items-center space-x-4 space-x-reverse">
-              <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <div className="flex items-center gap-4">
+              <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors rtl:rotate-180">
                 <ArrowRight className="w-5 h-5 text-gray-600" />
               </button>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">تفاصيل الطلب #{order.id}</h1>
+                <h1 className="text-2xl font-bold text-gray-900">{t("details.title")}{order.id}</h1>
                 <p className="text-sm text-gray-500">
-                  تم الطلب في {new Date(order.date).toLocaleDateString('ar-SA')} الساعة {new Date(order.date).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })}
+                  {t("details.date")} {new Date(order.date).toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US')} {t("details.at")} {new Date(order.date).toLocaleTimeString(locale === 'ar' ? 'ar-SA' : 'en-US', { hour: '2-digit', minute: '2-digit' })}
                 </p>
               </div>
             </div>
@@ -211,21 +206,21 @@ const OrderDetailsPage = () => {
           <div className="lg:col-span-2 space-y-8">
             {/* Order Status */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 flex-wrap gap-4">
                 <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium border ${getStatusColor(order.status)}`}>
                   {getStatusIcon(order.status)}
-                  <span className="mr-2">{getStatusText(order.status)}</span>
+                  <span className="ms-2">{getStatusText(order.status)}</span>
                 </div>
-                <div className="text-left">
+                <div className="text-right rtl:text-left">
                   <p className="text-2xl font-bold text-gray-900">${order.total}</p>
                 </div>
               </div>
 
               {order.trackingNumber && (
                 <div className="bg-gray-50 rounded-lg p-4 mb-4">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-4">
                     <div>
-                      <p className="text-sm font-medium text-gray-900">رقم التتبع</p>
+                      <p className="text-sm font-medium text-gray-900">{t("details.tracking_no")}</p>
                       <p className="text-lg font-mono text-blue-600">{order.trackingNumber}</p>
                     </div>
                     <button
@@ -240,30 +235,30 @@ const OrderDetailsPage = () => {
 
               {order.estimatedDelivery && (
                 <div className="flex items-center text-sm text-gray-600">
-                  <Calendar className="w-4 h-4 ml-1" />
-                  <span>التسليم المتوقع: {new Date(order.estimatedDelivery).toLocaleDateString('ar-SA')}</span>
+                  <Calendar className="w-4 h-4 me-1" />
+                  <span>{t("details.estimated")}: {new Date(order.estimatedDelivery).toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US')}</span>
                 </div>
               )}
             </div>
 
             {/* Tabs */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-              <div className="border-b border-gray-200">
-                <nav className="flex">
+              <div className="border-b border-gray-200 overflow-x-auto">
+                <nav className="flex whitespace-nowrap">
                   {[
-                    { key: 'details', label: 'تفاصيل الطلب', icon: Package },
-                    { key: 'tracking', label: 'تتبع الشحنة', icon: Truck },
-                    { key: 'invoice', label: 'الفاتورة', icon: Download }
+                    { key: 'details', label: t("details.tabs.details"), icon: Package },
+                    { key: 'tracking', label: t("details.tabs.tracking"), icon: Truck },
+                    { key: 'invoice', label: t("details.tabs.invoice"), icon: Download }
                   ].map(({ key, label, icon: Icon }) => (
                     <button
                       key={key}
                       onClick={() => setActiveTab(key as typeof activeTab)}
-                      className={`flex items-center px-6 py-4 text-sm font-medium border-b-2 ${activeTab === key
+                      className={`flex items-center px-6 py-4 text-sm font-medium border-b-2 transition-colors ${activeTab === key
                         ? 'border-blue-500 text-blue-600'
                         : 'border-transparent text-gray-500 hover:text-gray-700'
                         }`}
                     >
-                      <Icon className="w-4 h-4 ml-1" />
+                      <Icon className="w-4 h-4 me-1" />
                       {label}
                     </button>
                   ))}
@@ -275,28 +270,28 @@ const OrderDetailsPage = () => {
                 {activeTab === 'details' && (
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-lg font-medium text-gray-900 mb-4">المنتجات المطلوبة</h3>
+                      <h3 className="text-lg font-medium text-gray-900 mb-4">{t("details.products.title")}</h3>
                       <div className="space-y-4">
                         {order.items.map((item) => (
-                          <div key={item.id} className="flex items-center space-x-4 space-x-reverse p-4 border border-gray-200 rounded-lg">
+                          <div key={item.id} className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg flex-wrap sm:flex-nowrap">
                             <Image
                               src={item.image}
                               alt={item.name}
                               className="w-20 h-20 rounded-lg object-cover bg-gray-100"
-                              width={64}
-                              height={64}
+                              width={80}
+                              height={80}
                             />
-                            <div className="flex-1">
+                            <div className="flex-1 min-w-[200px]">
                               <h4 className="font-medium text-gray-900">{item.name}</h4>
-                              <p className="text-sm text-gray-500">رقم المنتج: {item.sku}</p>
+                              <p className="text-sm text-gray-500">{t("details.products.sku")}: {item.sku}</p>
                               {item.variant && (
-                                <p className="text-sm text-gray-500">النوع: {item.variant}</p>
+                                <p className="text-sm text-gray-500">{t("details.products.variant")}: {item.variant}</p>
                               )}
-                              <p className="text-sm text-gray-500">الكمية: {item.quantity}</p>
+                              <p className="text-sm text-gray-500">{t("details.products.qty")}: {item.quantity}</p>
                             </div>
-                            <div className="text-left">
+                            <div className="text-right rtl:text-left w-full sm:w-auto">
                               <p className="font-medium text-gray-900">${item.price}</p>
-                              <p className="text-sm text-gray-500">${(item.price * item.quantity).toFixed(2)} الإجمالي</p>
+                              <p className="text-sm text-gray-500">${(item.price * item.quantity).toFixed(2)} {t("details.products.total")}</p>
                             </div>
                           </div>
                         ))}
@@ -305,7 +300,7 @@ const OrderDetailsPage = () => {
 
                     {order.notes && (
                       <div>
-                        <h3 className="text-lg font-medium text-gray-900 mb-2">ملاحظات خاصة</h3>
+                        <h3 className="text-lg font-medium text-gray-900 mb-2">{t("details.notes")}</h3>
                         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                           <p className="text-sm text-gray-700">{order.notes}</p>
                         </div>
@@ -318,23 +313,23 @@ const OrderDetailsPage = () => {
                 {activeTab === 'tracking' && (
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-lg font-medium text-gray-900 mb-4">تتبع الشحنة</h3>
-                      <div className="space-y-4">
+                      <h3 className="text-lg font-medium text-gray-900 mb-4">{t("details.tabs.tracking")}</h3>
+                      <div className="relative ps-6 border-s border-gray-200 space-y-8">
                         {order.tracking?.map((track, index) => (
-                          <div key={index} className="flex items-start space-x-4 space-x-reverse">
-                            <div className={`flex-shrink-0 w-3 h-3 rounded-full mt-2 ${index === 0 ? 'bg-blue-500' : 'bg-green-500'
+                          <div key={index} className="relative">
+                            <div className={`absolute -start-[30px] w-4 h-4 rounded-full border-2 border-white ${index === 0 ? 'bg-blue-500 ring-4 ring-blue-50' : 'bg-green-500'
                               }`}></div>
-                            <div className="flex-1">
-                              <div className="flex items-center justify-between">
-                                <h4 className="font-medium text-gray-900">{track.status}</h4>
+                            <div className="flex flex-col gap-1">
+                              <div className="flex items-center justify-between gap-4 flex-wrap">
+                                <h4 className="font-medium text-gray-900">{t(`status.${track.status}`)}</h4>
                                 <span className="text-sm text-gray-500">
-                                  {new Date(track.date).toLocaleDateString('ar-SA')} {new Date(track.date).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })}
+                                  {new Date(track.date).toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US')}
                                 </span>
                               </div>
-                              <p className="text-sm text-gray-600">{track.description}</p>
+                              <p className="text-sm text-gray-600">{t(`details.tracking.${track.description}`)}</p>
                               {track.location && (
                                 <p className="text-sm text-gray-500 flex items-center mt-1">
-                                  <MapPin className="w-3 h-3 ml-1" />
+                                  <MapPin className="w-3 h-3 me-1" />
                                   {track.location}
                                 </p>
                               )}
@@ -343,52 +338,43 @@ const OrderDetailsPage = () => {
                         ))}
                       </div>
                     </div>
-
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                      <div className="flex items-center space-x-2 space-x-reverse">
-                        <ExternalLink className="w-4 h-4 text-blue-600" />
-                        <button className="text-sm font-medium text-blue-600 hover:text-blue-800">
-                          تتبع الشحنة على موقع شركة الشحن
-                        </button>
-                      </div>
-                    </div>
                   </div>
                 )}
 
                 {/* Invoice Tab */}
                 {activeTab === 'invoice' && (
                   <div className="space-y-6">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-medium text-gray-900">الفاتورة</h3>
-                      <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700">
-                        <Download className="w-4 h-4 ml-1" />
-                        تحميل الفاتورة
+                    <div className="flex items-center justify-between gap-4 flex-wrap">
+                      <h3 className="text-lg font-medium text-gray-900">{t("details.tabs.invoice")}</h3>
+                      <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors">
+                        <Download className="w-4 h-4 me-2" />
+                        {t("details.tabs.invoice")}
                       </button>
                     </div>
 
-                    <div className="border border-gray-200 rounded-lg p-6">
+                    <div className="border border-gray-200 rounded-lg p-6 bg-gray-50">
                       <div className="space-y-4">
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">المجموع الفرعي</span>
+                        <div className="flex justify-between gap-4">
+                          <span className="text-gray-600">{t("details.payment.subtotal")}</span>
                           <span className="font-medium">${order.subtotal}</span>
                         </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">الشحن</span>
+                        <div className="flex justify-between gap-4">
+                          <span className="text-gray-600">{t("details.payment.shipping")}</span>
                           <span className="font-medium">${order.shipping}</span>
                         </div>
-                        <div className="flex justify-between">
-                          <span className="text-gray-600">الضريبة</span>
+                        <div className="flex justify-between gap-4">
+                          <span className="text-gray-600">{t("details.payment.tax")}</span>
                           <span className="font-medium">${order.tax}</span>
                         </div>
                         {order.discount > 0 && (
-                          <div className="flex justify-between text-green-600">
-                            <span>الخصم</span>
+                          <div className="flex justify-between text-green-600 gap-4">
+                            <span>{t("details.payment.discount")}</span>
                             <span className="font-medium">-${order.discount}</span>
                           </div>
                         )}
-                        <div className="border-t pt-4">
-                          <div className="flex justify-between text-lg font-semibold">
-                            <span>المجموع الكلي</span>
+                        <div className="border-t border-gray-200 pt-4">
+                          <div className="flex justify-between text-lg font-bold text-gray-900 gap-4">
+                            <span>{t("details.payment.total")}</span>
                             <span>${order.total}</span>
                           </div>
                         </div>
@@ -396,10 +382,10 @@ const OrderDetailsPage = () => {
                     </div>
 
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2">طريقة الدفع</h4>
-                      <div className="flex items-center space-x-2 space-x-reverse">
-                        <CreditCard className="w-4 h-4 text-gray-500" />
-                        <span className="text-sm text-gray-600">{order.paymentMethod}</span>
+                      <h4 className="font-medium text-gray-900 mb-2">{t("details.payment.title")}</h4>
+                      <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg p-4">
+                        <CreditCard className="w-5 h-5 text-gray-400" />
+                        <span className="text-sm text-gray-700 font-medium">{order.paymentMethod}</span>
                       </div>
                     </div>
                   </div>
@@ -412,17 +398,17 @@ const OrderDetailsPage = () => {
           <div className="space-y-6">
             {/* Shipping Address */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">عنوان التسليم</h3>
-              <div className="space-y-2 text-sm">
-                <p className="font-medium">{order.shippingAddress.name}</p>
-                <p className="text-gray-600">{order.shippingAddress.street}</p>
-                <p className="text-gray-600">
-                  {order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.zipCode}
-                </p>
-                <p className="text-gray-600">{order.shippingAddress.country}</p>
-                <div className="pt-2 space-y-1">
-                  <div className="flex items-center space-x-2 space-x-reverse text-gray-600">
-                    <Phone className="w-4 h-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-4">{t("details.shipping_addr")}</h3>
+              <div className="space-y-3 text-sm">
+                <p className="font-semibold text-gray-900">{order.shippingAddress.name}</p>
+                <div className="text-gray-600 space-y-1">
+                  <p>{order.shippingAddress.street}</p>
+                  <p>{order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.zipCode}</p>
+                  <p>{order.shippingAddress.country}</p>
+                </div>
+                <div className="pt-2 border-t border-gray-100">
+                  <div className="flex items-center gap-2 text-gray-700 font-medium">
+                    <Phone className="w-4 h-4 text-gray-400" />
                     <span>{order.shippingAddress.phone}</span>
                   </div>
                 </div>
@@ -431,39 +417,43 @@ const OrderDetailsPage = () => {
 
             {/* Actions */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">الإجراءات</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-4">{t("details.actions.title")}</h3>
               <div className="space-y-3">
-                <button className="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                  <MessageCircle className="w-4 h-4 ml-2" />
-                  تواصل معنا
+                <button className="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                  <MessageCircle className="w-4 h-4 me-2" />
+                  {t("details.actions.contact")}
                 </button>
                 {order.status === 'delivered' && (
-                  <button className="w-full inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700">
-                    <Star className="w-4 h-4 ml-2" />
-                    تقييم المنتجات
+                  <button className="w-full inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors">
+                    <Star className="w-4 h-4 me-2" />
+                    {t("details.actions.rate")}
                   </button>
                 )}
                 {order.status !== 'delivered' && order.status !== 'cancelled' && (
-                  <button className="w-full inline-flex items-center justify-center px-4 py-2 border border-red-300 text-sm font-medium rounded-md text-red-700 bg-red-50 hover:bg-red-100">
-                    <XCircle className="w-4 h-4 ml-2" />
-                    إلغاء الطلب
+                  <button className="w-full inline-flex items-center justify-center px-4 py-2 border border-red-300 text-sm font-medium rounded-md text-red-700 bg-red-50 hover:bg-red-100 transition-colors">
+                    <XCircle className="w-4 h-4 me-2" />
+                    {t("details.actions.cancel")}
                   </button>
                 )}
               </div>
             </div>
 
             {/* Support */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-              <h3 className="text-lg font-medium text-blue-900 mb-2">تحتاج مساعدة؟</h3>
-              <p className="text-sm text-blue-700 mb-4">فريق الدعم متاح لمساعدتك</p>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2 space-x-reverse text-sm text-blue-700">
-                  <Phone className="w-4 h-4" />
-                  <span>+966 11 123 4567</span>
+            <div className="bg-blue-600 rounded-lg p-6 text-white shadow-md">
+              <h3 className="text-lg font-bold mb-2">{t("details.help.title")}</h3>
+              <p className="text-sm text-blue-50 mb-4 opacity-90">{t("details.help.desc")}</p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 text-sm">
+                  <div className="bg-blue-500 rounded-full p-2">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <span className="font-medium">+966 11 123 4567</span>
                 </div>
-                <div className="flex items-center space-x-2 space-x-reverse text-sm text-blue-700">
-                  <Mail className="w-4 h-4" />
-                  <span>support@store.com</span>
+                <div className="flex items-center gap-3 text-sm">
+                  <div className="bg-blue-500 rounded-full p-2">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <span className="font-medium">support@store.com</span>
                 </div>
               </div>
             </div>
@@ -473,5 +463,6 @@ const OrderDetailsPage = () => {
     </div>
   );
 };
+
 
 export default OrderDetailsPage;

@@ -7,8 +7,10 @@ import { Button } from "@/components/ui/button";
 import useGetCategory from "@/hooks/Product/useGetCategories";
 import useGetProducts from "@/hooks/Product/useGetProducts";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const ProductsPage = () => {
+  const t = useTranslations("shop.products.filter");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // ✅ Pagination state
@@ -50,7 +52,7 @@ const ProductsPage = () => {
         className="lg:hidden mb-6 px-5 py-3 bg-gradient-to-r from-black to-gray-800 text-white rounded-lg hover:from-gray-800 hover:to-black transition-all duration-300 shadow-md"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        {isSidebarOpen ? "إغلاق الفلتر" : "فتح الفلتر"}
+        {isSidebarOpen ? t("close") : t("open")}
       </Button>
 
       <div className="flex flex-col lg:flex-row gap-8">

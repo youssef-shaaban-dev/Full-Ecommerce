@@ -1,0 +1,56 @@
+{
+  "details": {
+    "size": "المقاس:",
+    "color": "الألوان:",
+    "quantity": "الكمية:",
+    "buy_now": "اشترِ الآن",
+    "add_to_cart": "إضافة إلى السلة",
+    "free_delivery": "شحن مجاني",
+    "delivery_desc": "أدخل الرمز البريدي لمعرفة توفر الشحن",
+    "return_delivery": "سياسة الإرجاع",
+    "return_desc": "إرجاع سهل ومجاني خلال 30 يوماً. التفاصيل",
+    "stock": "متوفر في المخزون",
+    "reviews": "مراجعات",
+    "related": "منتجات ذات صلة"
+  },
+  "reviews_page": {
+    "summary": "ملخص التقييمات",
+    "total_reviews": "({count} مراجعة)",
+    "overall": "التقييم الإجمالي",
+    "out_of": "من أصل {count} مراجعة",
+    "filter_title": "تصفية المراجعات",
+    "verified_only": "المراجعات المؤكدة فقط",
+    "with_images": "المراجعات مع الصور",
+    "write_review": "اكتب مراجعة",
+    "title": "المراجعات ({count})",
+    "sort": {
+      "newest": "الأحدث",
+      "oldest": "الأقدم",
+      "helpful": "الأكثر إفادة",
+      "rating": "الأعلى تقييماً"
+    },
+    "no_reviews": "لا توجد مراجعات",
+    "no_reviews_desc": "لا توجد مراجعات تطابق الفلاتر المحددة.",
+    "verified": "مؤكد",
+    "pros": "المميزات:",
+    "cons": "العيوب:",
+    "recommend": "أنصح بالشراء",
+    "not_recommend": "لا أنصح بالشراء",
+    "helpful": "مفيد ({count})",
+    "not_helpful": "غير مفيد ({count})",
+    "modal": {
+      "title": "اكتب مراجعة",
+      "rating_label": "التقييم الإجمالي *",
+      "stars": "{count} نجوم",
+      "review_title": "عنوان المراجعة *",
+      "review_title_placeholder": "اكتب عنواناً موجزاً لمراجعتك",
+      "review_content": "تفاصيل المراجعة *",
+      "review_content_placeholder": "شاركنا تجربتك مع هذا المنتج...",
+      "add_images": "إضافة صور (اختياري)",
+      "drag_drop": "اسحب الصور هنا أو انقر للاختيار",
+      "choose_images": "اختر الصور",
+      "cancel": "إلغاء",
+      "submit": "نشر المراجعة"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "navLinks": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "blog": "Blog"
+  },
+  "mobileMenu": {
+    "closeMenu": "Close Menu",
+    "openMenu": "Open Menu"
+  }
+}

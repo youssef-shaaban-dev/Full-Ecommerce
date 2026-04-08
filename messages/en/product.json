@@ -1,0 +1,56 @@
+{
+  "details": {
+    "size": "Size:",
+    "color": "Colours:",
+    "quantity": "Quantity:",
+    "buy_now": "Buy Now",
+    "add_to_cart": "Add to Cart",
+    "free_delivery": "Free Delivery",
+    "delivery_desc": "Enter your postal code for Delivery Availability",
+    "return_delivery": "Return Delivery",
+    "return_desc": "Free 30 Days Delivery Returns. Details",
+    "stock": "In Stock",
+    "reviews": "Reviews",
+    "related": "Related Item"
+  },
+  "reviews_page": {
+    "summary": "Reviews Summary",
+    "total_reviews": "({count} reviews)",
+    "overall": "Overall Rating",
+    "out_of": "out of {count} reviews",
+    "filter_title": "Filter Reviews",
+    "verified_only": "Verified Reviews Only",
+    "with_images": "Reviews with Images",
+    "write_review": "Write a Review",
+    "title": "Reviews ({count})",
+    "sort": {
+      "newest": "Newest",
+      "oldest": "Oldest",
+      "helpful": "Most Helpful",
+      "rating": "Highest Rated"
+    },
+    "no_reviews": "No reviews found",
+    "no_reviews_desc": "No reviews match the selected filters.",
+    "verified": "Verified",
+    "pros": "Pros:",
+    "cons": "Cons:",
+    "recommend": "I recommend this product",
+    "not_recommend": "I do not recommend this product",
+    "helpful": "Helpful ({count})",
+    "not_helpful": "Not helpful ({count})",
+    "modal": {
+      "title": "Write a Review",
+      "rating_label": "Overall Rating *",
+      "stars": "{count} stars",
+      "review_title": "Review Title *",
+      "review_title_placeholder": "Write a brief title for your review",
+      "review_content": "Review Details *",
+      "review_content_placeholder": "Share your experience with this product...",
+      "add_images": "Add Images (Optional)",
+      "drag_drop": "Drag images here or click to select",
+      "choose_images": "Choose Images",
+      "cancel": "Cancel",
+      "submit": "Post Review"
+    }
+  }
+}

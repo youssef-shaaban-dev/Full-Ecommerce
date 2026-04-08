@@ -8,6 +8,8 @@ import { useCartStore } from "@/stores/cart/cartStore";
 import AsyncAddToCart from "@/services/Cart/AsyncAddToCart";
 import {Link} from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
+
 
 const CartPage = () => {
   const cartItems = useCartStore((state) => state.cart);
@@ -25,10 +27,12 @@ const CartPage = () => {
     });
   };
 
+  const t = useTranslations("shop.cart");
+
   return (
     <div className="my-28 mx-auto w-[80%] custom-mid:w-[90%] custom-sm:w-[98%]">
       <div className="flex gap-2 m-0 pb-10 text-slate-400">
-        <PathLinks titles={["Cart"]} />
+        <PathLinks titles={[t("title")]} />
       </div>
       <div>
         <table className={styles.catTable}>
@@ -40,9 +44,9 @@ const CartPage = () => {
           </tbody>
         </table>
         <div className=" flex justify-between">
-          <button className={styles.cartBtn}>Return To Shop</button>
+          <button className={styles.cartBtn}>{t("buttons.return")}</button>
           <button className={styles.cartBtn} onClick={handleUpdateCart}>
-            Update Cart
+            {t("buttons.update")}
           </button>
         </div>
       </div>
@@ -53,19 +57,19 @@ const CartPage = () => {
               className="couponCode"
               type="text"
               name="text"
-              placeholder="Coupon Code"
+              placeholder={t("buttons.coupon_placeholder")}
             />
             <Button className="w-[210px] h-[55px] custom-sm:w-[120px] custom-sm:text-sm" type="submit">
-              Apply Coupon
+              {t("buttons.apply_coupon")}
             </Button>
           </form>
         </div>
         <div className="border-2 border-black py-5 px-7 w-[470px] custom-sm:w-[300px] text-center  ">
-          <h2 className="my-1 text-start">Cart Total</h2>
+          <h2 className="my-1 text-start rtl:text-end">{t("summary.title")}</h2>
           <CartTotal total={total} />
           <Link href="/checkout">
             <Button className="text-[12px] py-2 px-7 !mt-4 ">
-              Process to checkout
+              {t("buttons.checkout")}
             </Button>
           </Link>
         </div>
@@ -73,5 +77,6 @@ const CartPage = () => {
     </div>
   );
 };
+
 
 export default CartPage;

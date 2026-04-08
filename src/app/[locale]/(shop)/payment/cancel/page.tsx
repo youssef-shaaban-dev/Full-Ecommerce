@@ -3,8 +3,10 @@ import { useEffect } from "react";
 import { useCancelPayment } from "@/hooks/payment/useCancelPayment";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const PaymentCancel = () => {
+  const t = useTranslations("shop.payment.cancel");
   const { mutate: cancelPaymentMutate } = useCancelPayment();
   const searchParams = useSearchParams();
 
@@ -41,10 +43,8 @@ const PaymentCancel = () => {
         </div>
 
         {/* Message */}
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">تم إلغاء الدفع</h1>
-        <p className="text-gray-600 mb-6">
-          نأسف لإلغاء عملية الدفع. يمكنك المحاولة مرة أخرى أو العودة إلى صفحة المنتجات لاستكشاف المزيد.
-        </p>
+        <h1 className="text-2xl font-bold text-gray-800 mb-4">{t("title")}</h1>
+        <p className="text-gray-600 mb-6">{t("desc")}</p>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -52,13 +52,13 @@ const PaymentCancel = () => {
             href="/products"
             className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-300"
           >
-            العودة إلى المنتجات
+            {t("retry")}
           </Link>
           <Link
             href="/"
             className="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors duration-300"
           >
-            الصفحة الرئيسية
+            {t("home")}
           </Link>
         </div>
       </div>

@@ -1,0 +1,69 @@
+{
+  "services": {
+    "delivery": {
+      "head": "FREE AND FAST DELIVERY",
+      "para": "Free delivery for all orders over $140"
+    },
+    "customer_service": {
+      "head": "24/7 CUSTOMER SERVICE",
+      "para": "Friendly 24/7 customer support"
+    },
+    "guarantee": {
+      "head": "MONEY BACK GUARANTEE",
+      "para": "We return money within 30 days"
+    }
+  },
+  "slider": {
+    "no_images": "No images available",
+    "exclusive_offers": "Exclusive Offers",
+    "discover_latest": "Discover the latest products",
+    "shop_view": "Shop View",
+    "alt_banner": "Store Banner"
+  },
+  "view_all": "View All Products",
+  "flash_sales": {
+      "badge": "Today's",
+      "title": "Flash Sales"
+  },
+  "categories": {
+      "badge": "Categories",
+      "title": "Browse By Category"
+  },
+  "best_selling": {
+      "badge": "This Month",
+      "title": "Best Selling Products"
+  },
+  "timer": {
+    "hours": "Hours",
+    "days": "Days",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  },
+  "music_experience": {
+    "subtitle": "Category",
+    "title": "Enhance Your Music Experience",
+    "buy_now": "Buy Now!"
+  },
+  "features": {
+      "ps5": {
+          "title": "PlayStation 5",
+          "desc": "Black and White version of the PS5 coming out on sale."
+      },
+      "women": {
+          "title": "Women’s Collections",
+          "desc": "Featured woman collections that give you another vibe."
+      },
+      "speakers": {
+          "title": "Speakers",
+          "desc": "Amazon wireless speakers"
+      },
+      "perfume": {
+          "title": "Perfume",
+          "desc": "GUCCI INTENSE OUD EDP"
+      },
+      "shop_now": "Shop Now"
+  }
+}
+
+
+

@@ -3,16 +3,16 @@ import UserActions from './UserActions';
 import DesktopNavigation from './DesktopNavigation';
 import MobileSearch from './Mobile/MobileSearch';
 import MobileMenu from './Mobile/MobileMenu';
-import { useLocale } from 'next-intl';
 import { Logo } from './Logo';
+
 import { useEffect, useState } from 'react';
 import { Search, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function Navbar() {
 
-  const language = useLocale();
   const [isScrolled, setIsScrolled] = useState(false);
+
   const [isSearchOpen, setIsSearchOpen] = useState(true);
 
   // Handle Scroll Behavior
@@ -37,7 +37,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="w-full sticky top-0 z-50" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+    <div className="w-full sticky top-0 z-50">
       {/* Main Navbar */}
       <nav className={`bg-white border-b-2 border-red-600 shadow-lg transition-all duration-300 ${isScrolled ? 'py-1' : 'py-0'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,7 +45,7 @@ export default function Navbar() {
 
             <div className="flex items-center">
               {/*  Unified Menu - Hidden on Desktop */}
-              <div className="lg:hidden mr-2 rtl:mr-0 rtl:ml-2">
+              <div className="lg:hidden me-2">
                 <MobileMenu />
               </div>
 
@@ -57,7 +57,8 @@ export default function Navbar() {
             <DesktopNavigation />
 
             {/* Right Section */}
-            <div className="flex items-center space-x-2 rtl:space-x-reverse">
+            <div className="flex items-center gap-2">
+
 
               {/* Search Toggle Icon - Visible when scrolled */}
               <div className={`transition-all duration-300 transform ${isScrolled ? 'opacity-100 scale-100 w-auto' : 'opacity-0 scale-0 w-0 overflow-hidden'}`}>

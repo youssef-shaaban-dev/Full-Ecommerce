@@ -9,11 +9,15 @@ import ProductCard from "@/components/common/products/ProductCard";
 import { useCartStore } from "@/stores/cart/cartStore";
 import { SectionSkeleton } from "@/components/ui/SectionSkeleton";
 
+import { useTranslations, useLocale } from "next-intl";
+
 const WishListPage = () => {
   const [showAll, setShowAll] = useState(false);
+  const t = useTranslations("shop.wishlist");
+  const locale = useLocale();
+
   // Stores
   const { clearWishList, wishList: wishListItems } = useWishListStore((state) => state);
-  console.log(wishListItems);
   const { addToCart } = useCartStore((state) => state);
 
   if (!wishListItems) return <SectionSkeleton />;
@@ -30,13 +34,16 @@ const WishListPage = () => {
 
     clearWishList();
   };
+
   return (
-    <section className={styles.wishlist}>
+    <section className={styles.wishlist} key={locale}>
       <div className={styles.header}>
         <h3>
-          قائمة المفضلة <span>({wishListItems.length})</span>
+          {t("title")} <span>({wishListItems.length})</span>
         </h3>
-        <button className={styles.moveAllBtn} onClick={moveAllToCart}>نقل الكل إلى السلة 🛒</button>
+        <button className={styles.moveAllBtn} onClick={moveAllToCart}>
+          {t("move_all")} 🛒
+        </button>
       </div>
 
       <div className={styles.productsGrid}>
@@ -51,7 +58,7 @@ const WishListPage = () => {
             onClick={() => setShowAll(true)}
             className="w-[170px] !h-14 mt-8 px-4 py-2 text-white rounded-lg shadow-md bg-primary"
           >
-            عرض المزيد
+            {t("see_all")}
           </Button>
         </div>
       )}
@@ -60,5 +67,6 @@ const WishListPage = () => {
     </section>
   );
 };
+
 
 export default WishListPage;

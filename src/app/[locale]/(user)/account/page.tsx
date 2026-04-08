@@ -1,33 +1,31 @@
-"use client";
 import PathLinks from "@/components/common/PathLinks";
 import SideBarUl from "./SideBarUl";
 import AccountBody from "./AccountBody";
+import { useTranslations } from "next-intl";
 
-interface MenuItem {
-  title: string;
-  lis?: string[];
-}
-
-const uls: MenuItem[] = [
-  {
-    title: "Manage My Account",
-    lis: ["My Profile", "Addresses", "reviews"],
-  },
-  {
-    title: "My Orders",
-    lis: ["orders"],
-  },
-  {
-    title: "My WishList",
-  },
-];
 const AccountPage = () => {
+  const t = useTranslations("user");
+
+  const uls = [
+    {
+      title: t("sidebar.manage"),
+      lis: [t("sidebar.profile"), t("sidebar.addresses"), t("sidebar.reviews")],
+    },
+    {
+      title: t("sidebar.orders"),
+      lis: [t("sidebar.orders")],
+    },
+    {
+      title: t("sidebar.wishlist"),
+    },
+  ];
+
   return (
     <div className="my-28 mx-auto w-[90%]">
       <div className=" flex justify-between ">
-        <PathLinks titles={["My Account"]} />
+        <PathLinks titles={[t("title")]} />
         <h5 className="text-xs font-extralight">
-          Welcome! <span className="text-red-600">Joo</span>
+          {t("welcome")} <span className="text-red-600">Joo</span>
         </h5>
       </div>
       <div className="my-12 flex gap-10 custom-handling:flex-col">
@@ -43,5 +41,6 @@ const AccountPage = () => {
     </div>
   );
 };
+
 
 export default AccountPage;

@@ -1,0 +1,77 @@
+{
+  "reviews": {
+    "title": "My Reviews",
+    "subtitle": "Manage and track all your product reviews",
+    "stats": {
+      "total_reviews": "Total Reviews",
+      "helpful_likes": "Helpful Likes",
+      "total_views": "Total Views",
+      "avg_rating": "Average Rating",
+      "this_month": "this month",
+      "helpful_rate": "Helpful Rate"
+    },
+    "filters": {
+      "search_placeholder": "Search reviews...",
+      "status": {
+        "all": "All Statuses",
+        "published": "Published",
+        "pending": "Pending",
+        "rejected": "Rejected"
+      },
+      "sort": {
+        "newest": "Newest",
+        "oldest": "Oldest",
+        "rating": "Highest Rating",
+        "helpful": "Most Helpful",
+        "views": "Most Viewed"
+      },
+      "add_new": "Add New Review"
+    },
+    "list": {
+      "empty": {
+        "title": "No reviews found",
+        "desc": "No reviews found matching your search."
+      },
+      "verified": "Verified",
+      "edited_on": "Edited on",
+      "pros": "Pros:",
+      "cons": "Cons:",
+      "recommend": "I recommend this product",
+      "not_recommend": "I do not recommend this product",
+      "helpful": "helpful",
+      "views": "views",
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "pending": "Pending Review",
+        "resubmit": "Resubmit"
+      }
+    },
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next",
+      "showing": "Showing",
+      "to": "to",
+      "of": "of",
+      "reviews": "reviews"
+    }
+  },
+  "addresses": {
+    "title": "My Addresses",
+    "subtitle": "Manage your shipping addresses and contact information",
+    "add_new": "Add New Address",
+    "default": "Default",
+    "set_default": "Set as Default",
+    "edit": "Edit",
+    "delete": "Delete",
+    "empty": {
+      "title": "No addresses yet",
+      "desc": "Add your first shipping address to experience faster checkout."
+    },
+    "types": {
+      "home": "Home",
+      "office": "Office",
+      "other": "Other"
+    }
+  }
+}

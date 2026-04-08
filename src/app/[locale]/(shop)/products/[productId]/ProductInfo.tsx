@@ -8,9 +8,12 @@ import { useCartStore } from "@/stores/cart/cartStore";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 
+import { useTranslations } from "next-intl";
+
 const sizes = ["XS", "S", "M", "L", "XL"];
 
 const ProductInfo = ({ product }: { product: Product }) => {
+  const t = useTranslations("product.details");
   const [selectSize, setSelectSize] = useState("M");
 
   // State management for quantity
@@ -50,14 +53,14 @@ const ProductInfo = ({ product }: { product: Product }) => {
           ))}
           <CiStar className="text-gray-300 w-4 h-4" />
         </div>
-        <span className="text-gray-500 text-sm">(150 Reviews)</span>
+        <span className="text-gray-500 text-sm">(150 {t("reviews")})</span>
         <div className="w-px h-4 bg-gray-300"></div>
-        <span className="text-green-500 text-sm">{product.stock}</span>
+        <span className="text-green-500 text-sm">{t("stock")}</span>
       </div>
 
       {/* Price */}
       <div className="text-2xl font-normal text-black">
-        {product.price}
+        ${product.price}
       </div>
 
       {/* Description */}
@@ -68,7 +71,7 @@ const ProductInfo = ({ product }: { product: Product }) => {
       {/* Colors */}
       <div className="space-y-4">
         <div className="flex items-center gap-4">
-          <span className="text-black text-lg">Colours:</span>
+          <span className="text-black text-lg">{t("color")}</span>
           <div className="flex gap-2">
             <button className="w-5 h-5 bg-blue-500 rounded-full border-2 border-gray-300 focus:border-black"></button>
             <button className="w-5 h-5 bg-red-500 rounded-full border-2 border-black"></button>
@@ -79,7 +82,7 @@ const ProductInfo = ({ product }: { product: Product }) => {
       {/* Size */}
       <div className="space-y-4">
         <div className="flex items-center gap-4">
-          <span className="text-black text-lg">Size:</span>
+          <span className="text-black text-lg">{t("size")}</span>
           <div className="flex gap-2">
             {sizes.map((size) => (
               <button
@@ -115,7 +118,7 @@ const ProductInfo = ({ product }: { product: Product }) => {
           >
             -
           </button>
-          <span className="w-12 h-8 flex items-center justify-center text-black border-x border-gray-300">
+          <span className="w-12 h-8 flex items-center justify-center text-black border-inline border-gray-300">
             {currentItem.quantity}
           </span>
           <button
@@ -135,7 +138,7 @@ const ProductInfo = ({ product }: { product: Product }) => {
         {/* Buy Now Button */}
         <Button onClick={() => !isInCart && addToCart({ product, quantity: 1 })}
           disabled={isInCart} variant='secondary' className="px-12 h-11">
-          {isInCart ? "Added to Cart" : "Buy Now"}
+          {isInCart ? "Added" : t("buy_now")}
         </Button>
 
         {/* Wishlist */}
@@ -163,8 +166,8 @@ const ProductInfo = ({ product }: { product: Product }) => {
             </svg>
           </div>
           <div>
-            <div className="font-medium text-black">Free Delivery</div>
-            <div className="text-sm text-black underline">Enter your postal code for Delivery Availability</div>
+            <div className="font-medium text-black">{t("free_delivery")}</div>
+            <div className="text-sm text-black underline">{t("delivery_desc")}</div>
           </div>
         </div>
 
@@ -176,13 +179,14 @@ const ProductInfo = ({ product }: { product: Product }) => {
             </svg>
           </div>
           <div>
-            <div className="font-medium text-black">Return Delivery</div>
-            <div className="text-sm text-black">Free 30 Days Delivery Returns. <span className="underline">Details</span></div>
+            <div className="font-medium text-black">{t("return_delivery")}</div>
+            <div className="text-sm text-black">{t("return_desc")}</div>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
 
 export default ProductInfo;

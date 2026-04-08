@@ -8,50 +8,57 @@ import { CiTwitter } from "react-icons/ci";
 import { IoLogoInstagram } from "react-icons/io";
 import { RiLinkedinLine } from "react-icons/ri";
 import Image from "next/image";
-
-const teamMembers = [
-  {
-    name: "Tom Cruise",
-    role: "Founder & chairman",
-    image: "/images/TeamMemebers/mem1.png",
-    socials: { X: "#", insta: "#", linkedin: "#" },
-  },
-  {
-    name: "Emma Watson",
-    role: "Managing Director",
-    image: "/images/TeamMemebers/mem3.png",
-    socials: { X: "#", insta: "#", linkedin: "#" },
-  },
-  {
-    name: "Will Smith",
-    role: "Product designer",
-    image: "/images/TeamMemebers/mem2.png",
-    socials: { X: "#", insta: "#", linkedin: "#" },
-  },
-  {
-    name: "Tom Cruise",
-    role: "Founder & chairman",
-    image: "/images/TeamMemebers/mem1.png",
-    socials: { X: "#", insta: "#", linkedin: "#" },
-  },
-  {
-    name: "Emma Watson",
-    role: "Managing Director",
-    image: "/images/TeamMemebers/mem3.png",
-    socials: { X: "#", insta: "#", linkedin: "#" },
-  },
-  {
-    name: "Will Smith",
-    role: "Product designer",
-    image: "/images/TeamMemebers/mem2.png",
-    socials: { X: "#", insta: "#", linkedin: "#" },
-  },
-];
+import { useTranslations, useLocale } from "next-intl";
 
 const TeamSwiper = () => {
+  const t = useTranslations("about.team");
+  const locale = useLocale();
+  const isRtl = locale === 'ar';
+
+  const teamMembers = [
+    {
+      name: "Tom Cruise",
+      role: t("founder"),
+      image: "/images/TeamMemebers/mem1.png",
+      socials: { X: "#", insta: "#", linkedin: "#" },
+    },
+    {
+      name: "Emma Watson",
+      role: t("director"),
+      image: "/images/TeamMemebers/mem3.png",
+      socials: { X: "#", insta: "#", linkedin: "#" },
+    },
+    {
+      name: "Will Smith",
+      role: t("designer"),
+      image: "/images/TeamMemebers/mem2.png",
+      socials: { X: "#", insta: "#", linkedin: "#" },
+    },
+    {
+      name: "Tom Cruise",
+      role: t("founder"),
+      image: "/images/TeamMemebers/mem1.png",
+      socials: { X: "#", insta: "#", linkedin: "#" },
+    },
+    {
+      name: "Emma Watson",
+      role: t("director"),
+      image: "/images/TeamMemebers/mem3.png",
+      socials: { X: "#", insta: "#", linkedin: "#" },
+    },
+    {
+      name: "Will Smith",
+      role: t("designer"),
+      image: "/images/TeamMemebers/mem2.png",
+      socials: { X: "#", insta: "#", linkedin: "#" },
+    },
+  ];
+
   return (
     <div className="w-[90%] mx-auto my-12 relative">
       <Swiper
+        dir={isRtl ? "rtl" : "ltr"}
+        key={locale}
         modules={[Pagination]}
         spaceBetween={20}
         slidesPerView={1}
@@ -69,18 +76,19 @@ const TeamSwiper = () => {
       >
         {teamMembers.map((member, index) => (
           <SwiperSlide key={index}>
-            <div>
+            <div className="text-start rtl:text-end">
+              <div className="bg-slate-100 rounded-lg overflow-hidden h-[350px] relative">
               <Image
                 src={member.image}
                 alt="team member img"
-                width={1000}
-                height={100}
-                className="h-[350px] bg-slate-100 pt-5 px-12"
+                fill
+                className="object-contain pt-5 px-12"
               />
-              <div className="flex flex-col justify-end  p-2">
-                <h3 className="text-lg font-semibold mt-4">{member.name}</h3>
+              </div>
+              <div className="flex flex-col justify-end p-2 mt-4">
+                <h3 className="text-lg font-semibold">{member.name}</h3>
                 <p className="text-gray-500">{member.role}</p>
-                <div className="flex  gap-3 mt-3 text-xl">
+                <div className="flex gap-3 mt-3 text-xl">
                   <a href={member.socials.X}>
                     <CiTwitter />
                   </a>
@@ -126,5 +134,6 @@ const TeamSwiper = () => {
     </div>
   );
 };
+
 
 export default TeamSwiper;

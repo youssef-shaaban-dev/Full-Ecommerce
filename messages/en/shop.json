@@ -1,0 +1,90 @@
+{
+  "cart": {
+    "title": "Cart",
+    "table": {
+      "product": "Product",
+      "price": "Price",
+      "quantity": "Quantity",
+      "subtotal": "Subtotal"
+    },
+    "buttons": {
+      "return": "Return To Shop",
+      "update": "Update Cart",
+      "coupon_placeholder": "Coupon Code",
+      "apply_coupon": "Apply Coupon",
+      "checkout": "Process to checkout"
+    },
+    "summary": {
+      "title": "Cart Total",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "free": "Free",
+      "total": "Total"
+    }
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "move_all": "Move All To Cart",
+    "see_all": "See All",
+    "just_for_you": "Just For You"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "billing": {
+      "title": "Billing Details",
+      "first_name": "First Name",
+      "company": "Company Name (Optional)",
+      "street": "Street Address",
+      "apartment": "Apartment, floor, etc. (optional)",
+      "city": "Town/City",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "save_info": "Save this information for faster check-out next time"
+    },
+    "order": {
+      "title": "Order Summary",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "total": "Total Amount",
+      "bank": "Bank",
+      "cod": "Cash on delivery",
+      "place_order": "Place Order"
+    }
+  },
+  "payment": {
+    "success": {
+      "title": "Payment Successful",
+      "desc": "Thank you for your order! Your payment has been processed successfully. You can now continue shopping or return to the home page.",
+      "continue": "Continue Shopping",
+      "home": "Home Page"
+    },
+    "cancel": {
+      "title": "Payment Cancelled",
+      "desc": "We are sorry that the payment was cancelled. You can try again or return to the products page to explore more.",
+      "retry": "Return to Products",
+      "home": "Home Page"
+    }
+  },
+  "products": {
+    "filter": {
+      "open": "Open Filter",
+      "close": "Close Filter",
+      "title": "Filter Products",
+      "reset": "Reset",
+      "category": "Category",
+      "all_categories": "All Categories",
+      "sort": {
+        "label": "Sort By",
+        "default": "Default",
+        "price_asc": "Price: Low to High",
+        "price_desc": "Price: High to Low",
+        "newest": "Newest"
+      }
+    },
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next",
+      "page_info": "Page {current} of {total}"
+    }
+  }
+}

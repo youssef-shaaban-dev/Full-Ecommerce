@@ -5,7 +5,10 @@ import ProductSkeleton from "@/components/common/products/ProductSkeleton";
 import { Button } from "@/components/ui/button";
 import FlashSlider from "./FlashSlider";
 
+import { useTranslations } from "next-intl";
+
 const FlashSalesProducts = () => {
+    const t = useTranslations("home");
     const { data: products, isLoading } = useGetProducts();
     if (isLoading) {
         return (
@@ -28,11 +31,12 @@ const FlashSalesProducts = () => {
             {/* View All Button */}
             <div className="flex justify-center mt-16">
                 <Button variant='secondary' className="px-8 py-3 rounded transition-colors">
-                    View All Products
+                    {t("view_all")}
                 </Button>
             </div>
         </>
     );
 };
+
 
 export default FlashSalesProducts;

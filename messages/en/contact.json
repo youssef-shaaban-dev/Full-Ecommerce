@@ -1,0 +1,23 @@
+{
+  "title": "Contact",
+  "sidebar": {
+    "call": {
+      "title": "Call To Us",
+      "desc": "We are available 24/7, 7 days a week.",
+      "phone": "Phone: +8801611112222"
+    },
+    "write": {
+      "title": "Write To Us",
+      "desc": "Fill out our form and we will contact you within 24 hours.",
+      "email1": "Emails: customer@exclusive.com",
+      "email2": "Emails: support@exclusive.com"
+    }
+  },
+  "form": {
+    "name": "Your Name",
+    "email": "Your Email",
+    "phone": "Your Phone",
+    "message": "Your Message",
+    "send": "Send Message"
+  }
+}

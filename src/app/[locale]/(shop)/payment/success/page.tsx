@@ -1,7 +1,10 @@
 "use client";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const PaymentSuccess = () => {
+  const t = useTranslations("shop.payment.success");
+
   return (
     <div className="container mx-auto min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
@@ -24,10 +27,8 @@ const PaymentSuccess = () => {
         </div>
 
         {/* Success Message */}
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">تمت عملية الدفع بنجاح</h1>
-        <p className="text-gray-600 mb-6">
-          شكرًا لك على طلبك! تمت معالجة الدفع بنجاح. يمكنك الآن متابعة التسوق أو العودة إلى الصفحة الرئيسية.
-        </p>
+        <h1 className="text-2xl font-bold text-gray-800 mb-4">{t("title")}</h1>
+        <p className="text-gray-600 mb-6">{t("desc")}</p>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -35,13 +36,13 @@ const PaymentSuccess = () => {
             href="/products"
             className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors duration-300"
           >
-            مواصلة التسوق
+            {t("continue")}
           </Link>
           <Link
             href="/"
             className="px-6 py-3 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors duration-300"
           >
-            الصفحة الرئيسية
+            {t("home")}
           </Link>
         </div>
       </div>

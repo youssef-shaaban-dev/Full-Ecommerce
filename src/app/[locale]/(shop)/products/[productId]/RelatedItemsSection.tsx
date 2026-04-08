@@ -4,26 +4,26 @@ import ProductCard from '@/components/common/products/ProductCard';
 import ProductSkeleton from '@/components/common/products/ProductSkeleton';
 import { useState } from 'react';
 import Pagination from '@/components/pages/shop/Products/Pagination';
-
+import { useTranslations } from 'next-intl';
 
 const RelatedItemsSection = () => {
+    const t = useTranslations("product.details");
     // ✅ Pagination state
     const [pageNumber, setPageNumber] = useState(1);
     const pageSize = 6;
-
 
     const { data: products, isLoading } = useGetProducts({
         pageSize: 4,
         pageNumber,
     });
 
-
     return (
         <div className="mt-16">
             <div className="flex items-center gap-5 mb-6">
                 <Badge variant="secondary"></Badge>
-                <p className="text-md font-bold align-middle">Related Item</p>
+                <p className="text-md font-bold align-middle">{t("related")}</p>
             </div>
+
             {/* Products List */}
             {isLoading ? (
                 <div className="container mx-auto mt-12 px-4 sm:px-6 lg:px-8">

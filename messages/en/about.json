@@ -1,0 +1,19 @@
+{
+  "title": "About",
+  "story": {
+    "title": "Our Story",
+    "para1": "Launched in 2015, Exclusive is South Asia’s premier online shopping marketplace with an active presence in Bangladesh. Supported by a wide range of tailored marketing, data and service solutions, Exclusive has 10,500 sellers and 300 brands and serves 3 million customers across the region.",
+    "para2": "Exclusive has more than 1 Million products to offer, growing at a very fast rate. Exclusive offers a diverse assortment in categories ranging from consumer electronics to fashion."
+  },
+  "stats": {
+    "sellers": "Sellers active on our site",
+    "sales": "Monthly Product Sale",
+    "customers": "Customers active on our site",
+    "gross_sales": "Annual gross sale on our site"
+  },
+  "team": {
+    "founder": "Founder & Chairman",
+    "director": "Managing Director",
+    "designer": "Product Designer"
+  }
+}

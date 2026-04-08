@@ -1,0 +1,13 @@
+{
+  "navLinks": {
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "about": "من نحن",
+    "contact": "اتصل بنا",
+    "blog": "المدونة"
+  },
+  "mobileMenu": {
+    "closeMenu": "إغلاق القائمة",
+    "openMenu": "فتح القائمة"
+  }
+}

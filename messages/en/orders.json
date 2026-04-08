@@ -1,0 +1,71 @@
+{
+  "status": {
+    "pending": "Pending",
+    "processing": "Processing",
+    "shipped": "Shipped",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled"
+  },
+  "list": {
+    "title": "My Orders",
+    "subtitle": "Track and manage all your orders",
+    "search_placeholder": "Search by order number or product...",
+    "tabs": {
+      "all": "All Orders",
+      "pending": "Pending",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    },
+    "empty": {
+      "title": "No orders found",
+      "desc": "You haven't placed any orders yet.",
+      "action": "Start Shopping"
+    },
+    "order_card": {
+      "order_no": "Order #",
+      "items_count": "items",
+      "total": "Total:",
+      "view_details": "View Details"
+    }
+  },
+  "details": {
+    "title": "Order Details #",
+    "date": "Ordered on",
+    "at": "at",
+    "tracking_no": "Tracking Number",
+    "estimated": "Estimated Delivery",
+    "tabs": {
+      "details": "Order Details",
+      "tracking": "Tracking",
+      "invoice": "Invoice"
+    },
+    "products": {
+      "title": "Ordered Products",
+      "sku": "SKU",
+      "variant": "Variant",
+      "qty": "Qty",
+      "total": "Total"
+    },
+    "notes": "Special Notes",
+    "payment": {
+      "title": "Payment Method",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "tax": "Tax",
+      "discount": "Discount",
+      "total": "Total"
+    },
+    "shipping_addr": "Shipping Address",
+    "actions": {
+      "title": "Actions",
+      "contact": "Contact Us",
+      "rate": "Rate Products",
+      "cancel": "Cancel Order"
+    },
+    "help": {
+      "title": "Need Help?",
+      "desc": "Our support team is available to help you"
+    }
+  }
+}

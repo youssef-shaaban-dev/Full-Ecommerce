@@ -1,0 +1,25 @@
+{
+  "title": "My Account",
+  "welcome": "Welcome",
+  "sidebar": {
+    "manage": "Manage My Account",
+    "profile": "My Profile",
+    "addresses": "Addresses",
+    "reviews": "Reviews",
+    "orders": "My Orders",
+    "wishlist": "My WishList"
+  },
+  "edit_profile": {
+    "title": "Edit Your Profile",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email",
+    "address": "Address",
+    "password_changes": "Password Changes",
+    "current_pass": "Current Password",
+    "new_pass": "New Password",
+    "confirm_pass": "Confirm New Password",
+    "save": "Save Changes",
+    "cancel": "Cancel"
+  }
+}

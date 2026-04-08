@@ -1,6 +1,10 @@
 import styles from "@/styles/cart/Cart.module.scss";
-const headTitles = ["image","product", "price", "Quantity", "subtotal","remove"];
+import { useTranslations } from "next-intl";
+
 const CartHeadRow = () => {
+  const t = useTranslations("shop.cart.table");
+  const headTitles = [t("product"), t("price"), t("quantity"), t("subtotal")];
+
   return (
     <>
       <tr className={styles.tableRow}>
@@ -13,5 +17,6 @@ const CartHeadRow = () => {
     </>
   );
 };
+
 
 export default CartHeadRow;

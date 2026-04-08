@@ -1,19 +1,23 @@
-"use client";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "@/styles/contact/contact.scss";
 import { Button } from "@/components/ui/button";
-const initialValues = {
-  YourName: "",
-  YourEmail: "",
-  YourPhone: "",
-};
+import { useTranslations } from "next-intl";
 
-function submit() {
-  console.log("submitted");
-}
 const ContactField = () => {
+  const t = useTranslations("contact.form");
+
+  const initialValues = {
+    YourName: "",
+    YourEmail: "",
+    YourPhone: "",
+  };
+
+  function submit() {
+    console.log("submitted");
+  }
+
   return (
-    <div className=" py-8 px-7 bg-slate-50 border-r-4 shadow-lg contactForm">
+    <div className=" py-8 px-7 bg-slate-50 border-inline-end-4 shadow-lg contactForm">
       <Formik initialValues={initialValues} onSubmit={submit}>
         <Form className="flex flex-col gap-10">
           <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
@@ -21,7 +25,7 @@ const ContactField = () => {
               <Field
                 name="name"
                 className="p-2 border rounded bg-gray-100  custom-large:w-[120px]  formik-field  "
-                placeholder="Your Name"
+                placeholder={t("name")}
               />
               <ErrorMessage
                 name="name"
@@ -35,7 +39,7 @@ const ContactField = () => {
                 type="email"
                 name="email"
                 className=" p-2 border rounded bg-gray-100  custom-large:w-[120px]  formik-field "
-                placeholder="email"
+                placeholder={t("email")}
               />
               <ErrorMessage
                 name="email"
@@ -49,7 +53,7 @@ const ContactField = () => {
                 type="tel"
                 name="phone"
                 className=" p-2 border rounded bg-gray-100  custom-large:w-[120px] formik-field "
-                placeholder="Your Phone"
+                placeholder={t("phone")}
               />
               <ErrorMessage
                 name="phone"
@@ -65,7 +69,7 @@ const ContactField = () => {
               as="textarea"
               name="message"
               className="w-[100%] h-[207px] text-start p-2 border rounded bg-gray-100 resize-none formik-field"
-              placeholder="Your message"
+              placeholder={t("message")}
             />
             <ErrorMessage
               name="textarea"
@@ -75,7 +79,7 @@ const ContactField = () => {
           </div>
           <div className=" place-self-end">
             <Button className="px-10 py-3 text-xs font-thin">
-              Send Message
+              {t("send")}
             </Button>
           </div>
         </Form>
@@ -83,5 +87,6 @@ const ContactField = () => {
     </div>
   );
 };
+
 
 export default ContactField;

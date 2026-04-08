@@ -41,7 +41,7 @@ export default async function RootLayout({
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body>
         <QueryProvider>
-          <NextIntlClientProvider messages={messages}>
+          <NextIntlClientProvider locale={locale} messages={messages}>
             <Navbar />
             <ReactQueryDevtools initialIsOpen={false} />
             <main className="min-h-screen bg-gray-100 ">

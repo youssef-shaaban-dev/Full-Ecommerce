@@ -1,304 +1,202 @@
 'use client'
 import React, { useState } from 'react';
-import { Package, Eye, Download, Star, Clock, CheckCircle, XCircle, Truck } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import {
+    Search,
+    Calendar,
+    Clock,
+    CheckCircle,
+    XCircle,
+    Package,
+    Truck,
+    ArrowLeft
+} from 'lucide-react';
 import Image from 'next/image';
-
-interface OrderItem {
-    id: string;
-    name: string;
-    image: string;
-    price: number;
-    quantity: number;
-}
+import { useTranslations, useLocale } from 'next-intl';
 
 interface Order {
     id: string;
     date: string;
     status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
     total: number;
-    items: OrderItem[];
+    itemsCount: number;
+    image: string;
     trackingNumber?: string;
 }
 
-
-
-
 const CustomerOrdersPage = () => {
-    const router = useRouter();
+    const t = useTranslations("orders");
     const locale = useLocale();
-    const [activeTab, setActiveTab] = useState<'all' | 'pending' | 'delivered' | 'cancelled'>('all');
-    function showOrderDetails(id: number) {
-        router.push(`/${locale}/${id}`)
-    }
-    // بيانات وهمية للطلبات
+    const [activeTab, setActiveTab] = useState('all');
+    const [searchQuery, setSearchQuery] = useState('');
+
+    // Mock data
     const orders: Order[] = [
         {
             id: 'ORD-001',
-            date: '2024-08-20',
-            status: 'delivered',
-            total: 299.99,
-            items: [
-                {
-                    id: '1',
-                    name: 'iPhone 15 Pro',
-                    image: '/api/placeholder/80/80',
-                    price: 299.99,
-                    quantity: 1
-                }
-            ],
+            date: '2024-08-20T10:30:00',
+            status: 'shipped',
+            total: 1412.16,
+            itemsCount: 4,
+            image: '/api/placeholder/80/80',
             trackingNumber: 'TRK123456789'
         },
         {
             id: 'ORD-002',
-            date: '2024-08-18',
-            status: 'shipped',
-            total: 159.98,
-            items: [
-                {
-                    id: '2',
-                    name: 'Samsung Galaxy Watch',
-                    image: '/api/placeholder/80/80',
-                    price: 79.99,
-                    quantity: 2
-                }
-            ],
+            date: '2024-08-15T14:20:00',
+            status: 'delivered',
+            total: 245.50,
+            itemsCount: 2,
+            image: '/api/placeholder/80/80',
             trackingNumber: 'TRK987654321'
         },
         {
             id: 'ORD-003',
-            date: '2024-08-15',
-            status: 'processing',
-            total: 89.99,
-            items: [
-                {
-                    id: '3',
-                    name: 'Wireless Headphones',
-                    image: '/api/placeholder/80/80',
-                    price: 89.99,
-                    quantity: 1
-                }
-            ]
-        },
-        {
-            id: 'ORD-004',
-            date: '2024-08-10',
+            date: '2024-08-10T09:00:00',
             status: 'cancelled',
-            total: 199.99,
-            items: [
-                {
-                    id: '4',
-                    name: 'Gaming Keyboard',
-                    image: '/api/placeholder/80/80',
-                    price: 199.99,
-                    quantity: 1
-                }
-            ]
+            total: 89.99,
+            itemsCount: 1,
+            image: '/api/placeholder/80/80'
         }
     ];
 
-    const getStatusColor = (status: Order['status']) => {
-        switch (status) {
-            case 'pending': return 'text-yellow-600 bg-yellow-100';
-            case 'processing': return 'text-blue-600 bg-blue-100';
-            case 'shipped': return 'text-purple-600 bg-purple-100';
-            case 'delivered': return 'text-green-600 bg-green-100';
-            case 'cancelled': return 'text-red-600 bg-red-100';
-            default: return 'text-gray-600 bg-gray-100';
-        }
-    };
-
-    const getStatusIcon = (status: Order['status']) => {
-        switch (status) {
-            case 'pending': return <Clock className="w-4 h-4" />;
-            case 'processing': return <Package className="w-4 h-4" />;
-            case 'shipped': return <Truck className="w-4 h-4" />;
-            case 'delivered': return <CheckCircle className="w-4 h-4" />;
-            case 'cancelled': return <XCircle className="w-4 h-4" />;
-            default: return <Package className="w-4 h-4" />;
-        }
-    };
-
-    const getStatusText = (status: Order['status']) => {
-        switch (status) {
-            case 'pending': return 'في الانتظار';
-            case 'processing': return 'قيد المعالجة';
-            case 'shipped': return 'تم الشحن';
-            case 'delivered': return 'تم التسليم';
-            case 'cancelled': return 'ملغي';
-            default: return status;
-        }
-    };
-
     const filteredOrders = orders.filter(order => {
-        if (activeTab === 'all') return true;
-        return order.status === activeTab;
+        const matchesTab = activeTab === 'all' || order.status === activeTab;
+        const matchesSearch = order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            (order.trackingNumber?.toLowerCase() || '').includes(searchQuery.toLowerCase());
+        return matchesTab && matchesSearch;
     });
 
-    return (
-        <div className="min-h-screen bg-gray-50" dir="rtl">
-            {/* Header */}
-            <div className="bg-white shadow-sm border-b">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="py-6">
-                        <h1 className="text-3xl font-bold text-gray-900">طلباتي</h1>
-                        <p className="mt-2 text-gray-600">تتبع وإدارة جميع طلباتك</p>
-                    </div>
-                </div>
-            </div>
+    const getStatusColor = (status: Order['status']) => {
+        switch (status) {
+            case 'pending': return 'text-yellow-600 bg-yellow-100 border-yellow-200';
+            case 'processing': return 'text-blue-600 bg-blue-100 border-blue-200';
+            case 'shipped': return 'text-purple-600 bg-purple-100 border-purple-200';
+            case 'delivered': return 'text-green-600 bg-green-100 border-green-200';
+            case 'cancelled': return 'text-red-600 bg-red-100 border-red-200';
+            default: return 'text-gray-600 bg-gray-100 border-gray-200';
+        }
+    };
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {/* Tabs */}
+    const statusIcons = {
+        pending: <Clock className="w-4 h-4" />,
+        processing: <Package className="w-4 h-4" />,
+        shipped: <Truck className="w-4 h-4" />,
+        delivered: <CheckCircle className="w-4 h-4" />,
+        cancelled: <XCircle className="w-4 h-4" />
+    };
+
+    return (
+        <div className="min-h-screen bg-gray-50 py-12">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header Section */}
                 <div className="mb-8">
-                    <div className="border-b border-gray-200">
-                        <nav className="-mb-px flex space-x-8 space-x-reverse">
-                            {[
-                                { key: 'all', label: 'جميع الطلبات', count: orders.length },
-                                { key: 'pending', label: 'في الانتظار', count: orders.filter(o => o.status === 'pending').length },
-                                { key: 'delivered', label: 'تم التسليم', count: orders.filter(o => o.status === 'delivered').length },
-                                { key: 'cancelled', label: 'ملغية', count: orders.filter(o => o.status === 'cancelled').length }
-                            ].map((tab) => (
+                    <h1 className="text-3xl font-bold text-gray-900">{t("list.title")}</h1>
+                    <p className="mt-2 text-gray-600">{t("list.subtitle")}</p>
+                </div>
+
+                {/* Filters & Search */}
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-8">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        {/* Tabs */}
+                        <div className="flex p-1 bg-gray-100 rounded-lg overflow-x-auto no-scrollbar">
+                            {['all', 'pending', 'shipped', 'delivered', 'cancelled'].map((tab) => (
                                 <button
-                                    key={tab.key}
-                                    onClick={() => setActiveTab(tab.key as typeof activeTab)}
-                                    className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${activeTab === tab.key
-                                        ? 'border-blue-500 text-blue-600'
-                                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                    key={tab}
+                                    onClick={() => setActiveTab(tab)}
+                                    className={`px-4 py-2 text-sm font-medium rounded-md transition-all whitespace-nowrap ${activeTab === tab
+                                            ? 'bg-white text-blue-600 shadow-sm'
+                                            : 'text-gray-500 hover:text-gray-700'
                                         }`}
                                 >
-                                    {tab.label} ({tab.count})
+                                    {t(`list.tabs.${tab}`)}
                                 </button>
                             ))}
-                        </nav>
+                        </div>
+
+                        {/* Search */}
+                        <div className="relative flex-1 max-w-md">
+                            <Search className="absolute inset-y-0 right-3 flex items-center w-4 h-4 text-gray-400 pointer-events-none mt-3 rtl:left-3 rtl:right-auto" />
+                            <input
+                                type="text"
+                                placeholder={t("list.search_placeholder")}
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full pl-4 pr-10 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none rtl:pl-10 rtl:pr-4"
+                            />
+                        </div>
                     </div>
                 </div>
 
                 {/* Orders List */}
-                <div className="space-y-6">
-                    {filteredOrders.length === 0 ? (
-                        <div className="text-center py-12">
-                            <Package className="mx-auto h-12 w-12 text-gray-400" />
-                            <h3 className="mt-4 text-lg font-medium text-gray-900">لا توجد طلبات</h3>
-                            <p className="mt-2 text-gray-500">لم تقم بإجراء أي طلبات بعد.</p>
-                        </div>
-                    ) : (
+                <div className="space-y-4">
+                    {filteredOrders.length > 0 ? (
                         filteredOrders.map((order) => (
-                            <div key={order.id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                                {/* Order Header */}
-                                <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center space-x-4 space-x-reverse">
-                                            <div>
-                                                <h3 className="text-lg font-semibold text-gray-900">طلب #{order.id}</h3>
-                                                <p className="text-sm text-gray-500">تاريخ الطلب: {new Date(order.date).toLocaleDateString('ar-SA')}</p>
-                                            </div>
-                                            <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(order.status)}`}>
-                                                {getStatusIcon(order.status)}
-                                                <span className="mr-1">{getStatusText(order.status)}</span>
-                                            </div>
-                                        </div>
-                                        <div className="text-left">
-                                            <p className="text-lg font-semibold text-gray-900">${order.total}</p>
-                                            {order.trackingNumber && (
-                                                <p className="text-sm text-gray-500">رقم التتبع: {order.trackingNumber}</p>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Order Items */}
-                                <div className="px-6 py-4">
-                                    <div className="space-y-4">
-                                        {order.items.map((item) => (
-                                            <div key={item.id} className="flex items-center space-x-4 space-x-reverse">
+                            <div
+                                key={order.id}
+                                className="bg-white rounded-xl border border-gray-200 shadow-sm hover:border-blue-200 transition-all overflow-hidden group"
+                            >
+                                <div className="p-4 sm:p-6">
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                        <div className="flex items-center gap-4">
+                                            {/* Order Image/Preview */}
+                                            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 rounded-lg relative overflow-hidden flex-shrink-0">
                                                 <Image
-                                                    src={item.image}
-                                                    alt={item.name}
-                                                    className="w-16 h-16 rounded-lg object-cover bg-gray-100"
-                                                    width={64}
-                                                    height={64}
+                                                    src={order.image}
+                                                    alt={order.id}
+                                                    fill
+                                                    className="object-cover group-hover:scale-110 transition-transform duration-300"
                                                 />
-                                                <div className="flex-1">
-                                                    <h4 className="text-sm font-medium text-gray-900">{item.name}</h4>
-                                                    <p className="text-sm text-gray-500">الكمية: {item.quantity}</p>
+                                            </div>
+
+                                            {/* Order Meta */}
+                                            <div>
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <span className="text-sm font-semibold text-gray-900">
+                                                        {t("list.order_card.order_no")}{order.id}
+                                                    </span>
                                                 </div>
-                                                <div className="text-left">
-                                                    <p className="text-sm font-medium text-gray-900">${item.price}</p>
+                                                <div className="flex items-center text-sm text-gray-500">
+                                                    <Calendar className="w-4 h-4 me-1" />
+                                                    <span>{new Date(order.date).toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US')}</span>
                                                 </div>
                                             </div>
-                                        ))}
+                                        </div>
+
+                                        <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2">
+                                            <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(order.status)}`}>
+                                                <span className="me-1.5">{statusIcons[order.status]}</span>
+                                                {t(`status.${order.status}`)}
+                                            </div>
+                                            <div className="text-sm">
+                                                <span className="text-gray-500 me-2">{order.itemsCount} {t("list.order_card.items_count")}</span>
+                                                <span className="font-bold text-gray-900">{t("list.order_card.total")} ${order.total}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {/* Order Actions */}
-                                <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex space-x-3 space-x-reverse">
-                                            <button className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                <Eye className="w-4 h-4 ml-1" onClick={() => showOrderDetails(Number(order.id))} />
-                                                عرض التفاصيل
-                                            </button>
-                                            {order.status === 'delivered' && (
-                                                <button className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                    <Download className="w-4 h-4 ml-1" />
-                                                    تحميل الفاتورة
-                                                </button>
-                                            )}
-                                            {order.trackingNumber && (
-                                                <button className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                    <Truck className="w-4 h-4 ml-1" />
-                                                    تتبع الشحنة
-                                                </button>
-                                            )}
-                                        </div>
-                                        {order.status === 'delivered' && (
-                                            <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                <Star className="w-4 h-4 ml-1" />
-                                                تقييم المنتج
-                                            </button>
-                                        )}
-                                    </div>
+                                {/* Footer Actions */}
+                                <div className="bg-gray-50 px-4 sm:px-6 py-3 border-t border-gray-100 flex items-center justify-end gap-3">
+                                    <button className="flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors">
+                                        <span>{t("list.order_card.view_details")}</span>
+                                        <ArrowLeft className="w-4 h-4 ms-1 rtl:rotate-180" />
+                                    </button>
                                 </div>
                             </div>
                         ))
+                    ) : (
+                        <div className="text-center py-20 bg-white rounded-2xl border border-dashed border-gray-300">
+                            <div className="bg-gray-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <Search className="w-8 h-8 text-gray-400" />
+                            </div>
+                            <h3 className="text-lg font-medium text-gray-900">{t("list.empty.title")}</h3>
+                            <p className="text-gray-500 mt-1">{t("list.empty.desc")}</p>
+                            <button className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                {t("list.empty.action")}
+                            </button>
+                        </div>
                     )}
                 </div>
-
-                {/* Pagination */}
-                {filteredOrders.length > 0 && (
-                    <div className="mt-8 flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 rounded-lg">
-                        <div className="flex flex-1 justify-between sm:hidden">
-                            <button className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                السابق
-                            </button>
-                            <button className="relative mr-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                التالي
-                            </button>
-                        </div>
-                        <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-                            <div>
-                                <p className="text-sm text-gray-700">
-                                    عرض <span className="font-medium">1</span> إلى <span className="font-medium">{filteredOrders.length}</span> من{' '}
-                                    <span className="font-medium">{filteredOrders.length}</span> طلب
-                                </p>
-                            </div>
-                            <div>
-                                <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                                    <button className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-                                        السابق
-                                    </button>
-                                    <button className="relative inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
-                                        1
-                                    </button>
-                                    <button className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-                                        التالي
-                                    </button>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                )}
             </div>
         </div>
     );

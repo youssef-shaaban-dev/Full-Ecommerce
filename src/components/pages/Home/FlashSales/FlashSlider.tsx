@@ -1,8 +1,8 @@
 "use client";
 
+import { useLocale } from "next-intl";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -15,29 +15,20 @@ const FlashSlider: React.FC<SimpleSliderProps> = ({
     children,
     spaceBetween = 20,
 }) => {
+    const locale = useLocale();
+
     return (
         <div className="relative">
-            {/*  Navigation Buttons */}
-            <div className="absolute -top-16 right-0 flex gap-2 z-10">
-                <button
-                    className="custom-prev w-10 h-10 bg-[#DB4444] rounded-full flex items-center justify-center hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                    <ChevronLeft className="w-5 h-5 text-white" />
-                </button>
-                <button
-                    className="custom-next w-10 h-10 bg-[#DB4444] rounded-full flex items-center justify-center hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                    <ChevronRight className="w-5 h-5 text-white" />
-                </button>
-            </div>
-
             {/* Slider */}
             <Swiper
                 modules={[Navigation]}
+                dir={locale === "ar" ? "rtl" : "ltr"}
+                key={locale}
                 navigation={{
-                    nextEl: ".custom-next",
-                    prevEl: ".custom-prev",
+                    nextEl: ".flash-next",
+                    prevEl: ".flash-prev",
                 }}
+
                 spaceBetween={spaceBetween}
                 breakpoints={{
                     0: {

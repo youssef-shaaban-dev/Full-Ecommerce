@@ -1,24 +1,28 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
-const TimerData = [
-  { value: "23", label: "Hours" },
-  { value: "05", label: "Days" },
-  { value: "59", label: "Minutes" },
-  { value: "35", label: "Seconds" }
-];
 const MusicSection = () => {
+  const t = useTranslations("home.music_experience");
+
+  const TimerData = [
+    { value: "23", label: t("timer.hours") },
+    { value: "05", label: t("timer.days") },
+    { value: "59", label: t("timer.minutes") },
+    { value: "35", label: t("timer.seconds") }
+  ];
+
   return (
     <section className="bg-gradient-to-br from-slate-950 to-slate-900 mb-6 min-h-[400px] flex flex-col lg:flex-row justify-between items-center p-4 sm:p-6 md:p-8 lg:p-11 rounded-2xl shadow-2xl border border-slate-800">
 
       {/* Content Section */}
       <div className="flex flex-col w-full lg:w-1/2 gap-4 md:gap-6 mb-6 lg:mb-0 lg:pr-8">
         <p className="text-[#81c39b] text-lg sm:text-xl md:text-2xl font-medium tracking-wide">
-          Category
+          {t("subtitle")}
         </p>
 
         <h2 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
-          Enhance Your Music Experience
+          {t("title")}
         </h2>
 
         {/* Timer Circles */}
@@ -36,9 +40,10 @@ const MusicSection = () => {
 
         {/* Buy Button */}
         <Button className="bg-gradient-to-r from-[#00FF66] to-[#00e65a] hover:from-[#00e65a] hover:to-[#00d451] text-black font-bold py-3 px-6 sm:py-4 sm:px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95 w-fit min-w-[140px] sm:min-w-[160px]">
-          <span className="text-sm sm:text-base">Buy Now!</span>
+          <span className="text-sm sm:text-base">{t("buy_now")}</span>
         </Button>
       </div>
+
 
       {/* Image Section */}
       <div className="relative flex justify-center items-center w-full lg:w-1/2 h-48 sm:h-56 md:h-64 lg:h-80 xl:h-96">

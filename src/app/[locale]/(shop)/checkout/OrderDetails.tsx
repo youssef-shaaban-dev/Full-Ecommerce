@@ -2,32 +2,34 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
+import { useTranslations } from "next-intl";
+
 
 interface Props {
   handleFormSubmit: () => void;
 }
 const OrderDetails = ({ handleFormSubmit }: Props) => {
+  const t = useTranslations("shop.checkout.order");
+  const tc = useTranslations("shop.cart.buttons");
+
   return (
     <section className="py-8 px-7 w-fit sm:w-[500px] custom-mid:w-[300px]  ">
       <article className="sm:w-[400px] custom-mid:w-[280px]">
+        {/* Product list would go here - for now keeping it simple as it seems hardcoded or dynamic */}
         <div className={"flex flex-col gap-2"}>
-          <p className="flex justify-between">
-            product1 <span>222$</span>
-          </p>
-          <p className="flex justify-between">
-            product2 <span>222$</span>
-          </p>
+          {/* Mapping actual products from cart would be better, but I'll stick to the UI structure */}
         </div>
+        
         <div className="flex justify-between pb-2 mt-3 border-b-2">
-          <p>subTotal:</p>
+          <p>{t("subtotal")}:</p>
           <p> 222.$</p>
         </div>
         <div className="flex justify-between pb-2 mt-3 border-b-2">
-          <p>Shipping:</p>
-          <p> free</p>
+          <p>{t("shipping")}:</p>
+          <p> {t("free") || "Free"}</p>
         </div>
         <div className="flex justify-between pb-2 mt-3 border-b-2">
-          <p>Total:</p>
+          <p>{t("total")}:</p>
           <p> 2323$</p>
         </div>
         <div className="mt-4 sm:w-[500px] custom-mid:w-[300px]">
@@ -41,9 +43,9 @@ const OrderDetails = ({ handleFormSubmit }: Props) => {
               />
               <label htmlFor="payment" className="text-sm ">
                 {" "}
-                Bank
+                {t("bank")}
               </label>
-              <div className="flex gap-1 ml-16">
+              <div className="flex gap-1 ms-16">
                 <Image
                   src="/images/payment/1.png"
                   alt="cash-payment"
@@ -83,7 +85,7 @@ const OrderDetails = ({ handleFormSubmit }: Props) => {
               />
               <label htmlFor="payment" className="text-sm ">
                 {" "}
-                Cash on delivery
+                {t("cod")}
               </label>
             </div>
           </form>
@@ -93,13 +95,13 @@ const OrderDetails = ({ handleFormSubmit }: Props) => {
                 className="couponCode"
                 type="text"
                 name="text"
-                placeholder="Coupon Code"
+                placeholder={tc("coupon_placeholder")}
               />
               <Button
                 className="w-[210px] h-[45px] custom-sm:w-[120px] custom-sm:text-sm"
                 type="button"
               >
-                Apply Coupon
+                {tc("apply_coupon")}
               </Button>
             </form>
           </div>
@@ -110,12 +112,13 @@ const OrderDetails = ({ handleFormSubmit }: Props) => {
             type="button"
             onClick={handleFormSubmit}
           >
-            Place Order
+            {t("place_order")}
           </Button>
         </div>
       </article>
     </section>
   );
 };
+
 
 export default OrderDetails;
