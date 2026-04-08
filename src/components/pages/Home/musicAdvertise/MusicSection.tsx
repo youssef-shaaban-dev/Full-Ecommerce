@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -13,7 +15,7 @@ const MusicSection = () => {
   ];
 
   return (
-    <section className="bg-gradient-to-br from-slate-950 to-slate-900 mb-6 min-h-[400px] flex flex-col lg:flex-row justify-between items-center p-4 sm:p-6 md:p-8 lg:p-11 rounded-2xl shadow-2xl border border-slate-800">
+    <section className="bg-linear-to-br from-slate-950 to-slate-900 mb-6 min-h-[400px] flex flex-col lg:flex-row justify-between items-center p-4 sm:p-6 md:p-8 lg:p-11 rounded-2xl shadow-2xl border border-slate-800">
 
       {/* Content Section */}
       <div className="flex flex-col w-full lg:w-1/2 gap-4 md:gap-6 mb-6 lg:mb-0 lg:pr-8">
@@ -30,7 +32,7 @@ const MusicSection = () => {
           {TimerData.map((timer, index) => (
             <div
               key={index}
-              className="bg-gradient-to-b from-white to-slate-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 rounded-full flex flex-col justify-center items-center font-bold text-xs sm:text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="bg-linear-to-b from-white to-slate-100 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 rounded-full flex flex-col justify-center items-center font-bold text-xs sm:text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               <span className="text-lg sm:text-xl font-extrabold">{timer.value}</span>
               <span className="text-[8px] sm:text-[10px] text-gray-600 -mt-1">{timer.label}</span>
@@ -39,7 +41,7 @@ const MusicSection = () => {
         </div>
 
         {/* Buy Button */}
-        <Button className="bg-gradient-to-r from-[#00FF66] to-[#00e65a] hover:from-[#00e65a] hover:to-[#00d451] text-black font-bold py-3 px-6 sm:py-4 sm:px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95 w-fit min-w-[140px] sm:min-w-[160px]">
+        <Button className="bg-linear-to-r from-[#00FF66] to-[#00e65a] hover:from-[#00e65a] hover:to-[#00d451] text-black font-bold py-3 px-6 sm:py-4 sm:px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95 w-fit min-w-[140px] sm:min-w-[160px]">
           <span className="text-sm sm:text-base">{t("buy_now")}</span>
         </Button>
       </div>

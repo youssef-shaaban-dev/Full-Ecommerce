@@ -1,4 +1,3 @@
-import { ServiceCard } from "@/components/pages/Home/Services/ServiceCard";
 import { CiShop } from "react-icons/ci";
 import { HiOutlineCurrencyDollar } from "react-icons/hi2";
 import { MdShoppingBag } from "react-icons/md";
@@ -32,12 +31,21 @@ const Statistics = () => {
   ];
 
   return (
-    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
       {servicesData &&
         servicesData.map((card, index) => {
           return (
-            <div key={index} className="border py-4 bg-white">
-              <ServiceCard icon={card.icon} head={card.head} para={card.para} />
+            <div 
+              key={index} 
+              className="group border border-slate-200 p-8 bg-white rounded-lg flex flex-col items-center justify-center gap-4 transition-all duration-300 hover:bg-primary-red hover:border-primary-red hover:shadow-2xl hover:-translate-y-2 cursor-default"
+            >
+              <div className="bg-slate-200 text-slate-900 group-hover:bg-white/20 group-hover:text-white p-3 rounded-full w-16 h-16 flex items-center justify-center transition-colors duration-300">
+                <card.icon size={32} />
+              </div>
+              <div className="text-center group-hover:text-white transition-colors duration-300">
+                <h3 className="text-3xl font-bold tracking-tight mb-1">{card.head}</h3>
+                <p className="text-sm font-medium text-slate-600 group-hover:text-white/90">{card.para}</p>
+              </div>
             </div>
           );
         })}

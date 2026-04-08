@@ -1,3 +1,5 @@
+"use client";
+
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";

@@ -76,26 +76,26 @@ const TeamSwiper = () => {
       >
         {teamMembers.map((member, index) => (
           <SwiperSlide key={index}>
-            <div className="text-start rtl:text-end">
-              <div className="bg-slate-100 rounded-lg overflow-hidden h-[350px] relative">
-              <Image
-                src={member.image}
-                alt="team member img"
-                fill
-                className="object-contain pt-5 px-12"
-              />
+            <div className="flex flex-col gap-6 p-4">
+              <div className="bg-slate-100 rounded-lg overflow-hidden h-[400px] relative transition-transform duration-500 hover:scale-[1.02] group">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  className="object-contain pt-8 px-8 transition-transform duration-500 group-hover:scale-110"
+                />
               </div>
-              <div className="flex flex-col justify-end p-2 mt-4">
-                <h3 className="text-lg font-semibold">{member.name}</h3>
-                <p className="text-gray-500">{member.role}</p>
-                <div className="flex gap-3 mt-3 text-xl">
-                  <a href={member.socials.X}>
+              <div className="flex flex-col gap-2">
+                <h3 className="text-2xl font-bold tracking-tight">{member.name}</h3>
+                <p className="text-slate-600 font-medium">{member.role}</p>
+                <div className="flex gap-4 mt-2 text-2xl">
+                  <a href={member.socials.X} className="hover:text-primary-red transition-colors duration-300">
                     <CiTwitter />
                   </a>
-                  <a href={member.socials.insta}>
+                  <a href={member.socials.insta} className="hover:text-primary-red transition-colors duration-300">
                     <IoLogoInstagram />
                   </a>
-                  <a href={member.socials.linkedin}>
+                  <a href={member.socials.linkedin} className="hover:text-primary-red transition-colors duration-300">
                     <RiLinkedinLine />
                   </a>
                 </div>
@@ -105,30 +105,29 @@ const TeamSwiper = () => {
         ))}
       </Swiper>
 
-      <div className="swiper-pagination mt-4"></div>
+      <div className="swiper-pagination mt-8!"></div>
 
       <style jsx global>{`
         .swiper-pagination {
           position: relative !important;
           display: flex;
           justify-content: center;
-          margin-top: 10px;
         }
 
         .swiper-pagination-bullet {
-          width: 7px;
-          height: 7px;
-          background-color: gray !important;
-          opacity: 0.5 !important;
+          width: 8px;
+          height: 8px;
+          background-color: #cbd5e1 !important;
+          opacity: 1 !important;
           transition: all 0.3s ease;
-          margin: 0 5px !important;
+          margin: 0 6px !important;
           border-radius: 50%;
         }
 
         .swiper-pagination-bullet-active {
-          background-color: #ff4500 !important;
-          opacity: 1 !important;
+          background-color: var(--color-primary-red) !important;
           transform: scale(1.2);
+          box-shadow: 0 0 10px rgba(219, 68, 68, 0.3);
         }
       `}</style>
     </div>

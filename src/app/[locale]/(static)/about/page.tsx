@@ -10,36 +10,38 @@ const AboutPage = () => {
   const t = useTranslations("about");
   
   return (
-    <div className="my-24 mx-auto w-[80%] flex flex-col gap-5">
+    <div className="my-12 md:my-24 container mx-auto px-4 flex flex-col gap-16">
       <PathLinks titles={[t("title")]} />
-      <div className="flex justify-end gap-10 relative inset-inline-start-[130px] custom-mid:inset-inline-start-0 custom-mid:gap-5">
-        <div className="flex flex-col gap-4 w-[500px] mt-16 custom-handling:text-center">
-          <h1 className="text-4xl">{t("story.title")}</h1>
-          <p>
-            {t("story.para1")}
-          </p>
-          <p>
-            {t("story.para2")}
-          </p>
+      
+      {/* Our Story Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center overflow-hidden">
+        <div className="flex flex-col gap-6 order-2 md:order-1 max-w-xl">
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight">{t("story.title")}</h1>
+          <div className="flex flex-col gap-4 text-base md:text-lg leading-relaxed text-slate-700">
+            <p>{t("story.para1")}</p>
+            <p>{t("story.para2")}</p>
+          </div>
         </div>
-        <div>
+        
+        <div className="order-1 md:order-2">
           <Image
             src="/images/aboutImg.png"
-            alt="About img"
+            alt="Exclusive Our Story"
             width={1000}
-            height={100}
-            className="w-[800px] h-[500px] object-cover custom-handling:hidden"
+            height={600}
+            priority
+            className="w-full h-auto object-cover rounded-sm shadow-xl"
           />
         </div>
       </div>
 
-      <div className="mt-10 ">
+      <div className="py-10">
         <Statistics />
       </div>
-      <div className="my-4">
+      <div>
         <TeamSwiper />
       </div>
-      <div className="my-5">
+      <div className="pb-10">
         <Services />
       </div>
     </div>
