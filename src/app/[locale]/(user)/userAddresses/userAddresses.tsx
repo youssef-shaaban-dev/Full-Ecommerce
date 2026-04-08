@@ -175,7 +175,7 @@ const UserAddressesPage = () => {
                                 <div className="flex items-center justify-between gap-2">
                                     <div className="flex items-center gap-3">
                                         <button
-                                            onClick={() => handleEdit(address)}
+                                            onClick={() => handleEdit()}
                                             className="inline-flex items-center px-1 py-1 text-sm text-blue-600 hover:text-blue-800 transition-colors"
                                         >
                                             <Edit className="w-4 h-4 me-1" />
